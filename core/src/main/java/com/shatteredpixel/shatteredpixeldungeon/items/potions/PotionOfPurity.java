@@ -30,6 +30,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
+import com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.BArray;
@@ -93,6 +94,7 @@ public class PotionOfPurity extends Potion {
 	public void apply( Hero hero ) {
 		GLog.w( Messages.get(this, "protected") );
 		Buff.prolong( hero, BlobImmunity.class, BlobImmunity.DURATION + hero.pointsInTalent(Talent.POTION_DURATION));
+		SpellSprite.show(hero, SpellSprite.PURITY);
 		identify();
 	}
 	

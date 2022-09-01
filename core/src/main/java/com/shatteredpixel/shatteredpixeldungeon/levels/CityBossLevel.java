@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.levels;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Bones;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.DwarfKing;
@@ -31,6 +32,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.CityPainter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.ImpShopRoom;
@@ -119,6 +121,12 @@ public class CityBossLevel extends Level {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle( bundle );
+		//pre-1.3.0 saves, modifies exit transition with custom size
+		if (bundle.contains("exit")){
+			LevelTransition exit = getTransition(LevelTransition.Type.REGULAR_EXIT);
+			exit.set(end.left+4, end.top+4, end.left+4+6, end.top+4+4);
+			transitions.add(exit);
+		}
 		impShop = (ImpShopRoom) bundle.get( IMP_SHOP );
 		if (map[topDoor] != Terrain.LOCKED_DOOR && Imp.Quest.isCompleted() && !impShop.shopSpawned()){
 			spawnShop();
@@ -147,8 +155,9 @@ public class CityBossLevel extends Level {
 
 		Painter.set(this, c.x, entry.top, Terrain.DOOR);
 
-		entrance = c.x + (c.y+2)*width();
+		int entrance = c.x + (c.y+2)*width();
 		Painter.set(this, entrance, Terrain.ENTRANCE);
+		transitions.add(new LevelTransition(this, entrance, LevelTransition.Type.REGULAR_ENTRANCE));
 
 		//DK's throne room
 		Painter.fillDiamond(this, arena, 1, Terrain.EMPTY);
@@ -173,7 +182,11 @@ public class CityBossLevel extends Level {
 		Painter.fill(this, end, Terrain.CHASM);
 		Painter.fill(this, end.left+4, end.top+5, 7, 18, Terrain.EMPTY);
 		Painter.fill(this, end.left+4, end.top+5, 7, 4, Terrain.EXIT);
-		exit = end.left+7 + (end.top+8)*width();
+
+		int exitCell = end.left+7 + (end.top+8)*width();
+		LevelTransition exit = new LevelTransition(this, exitCell, LevelTransition.Type.REGULAR_EXIT);
+		exit.set(end.left+4, end.top+4, end.left+4+6, end.top+4+4);
+		transitions.add(exit);
 
 		impShop = new ImpShopRoom();
 		impShop.set(end.left+3, end.top+12, end.left+11, end.top+20);
@@ -255,7 +268,7 @@ public class CityBossLevel extends Level {
 			int pos;
 			do {
 				pos = randomRespawnCell(null);
-			} while (pos == entrance);
+			} while (pos == entrance());
 			drop( item, pos ).setHauntedIfCursed().type = Heap.Type.REMAINS;
 		}
 	}
@@ -264,7 +277,7 @@ public class CityBossLevel extends Level {
 	public int randomRespawnCell( Char ch ) {
 		int cell;
 		do {
-			cell = entrance + PathFinder.NEIGHBOURS8[Random.Int(8)];
+			cell = entrance() + PathFinder.NEIGHBOURS8[Random.Int(8)];
 		} while (!passable[cell]
 				|| (Char.hasProp(ch, Char.Property.LARGE) && !openSpace[cell])
 				|| Actor.findChar(cell) != null);
@@ -287,6 +300,7 @@ public class CityBossLevel extends Level {
 	@Override
 	public void seal() {
 		super.seal();
+		Statistics.qualifiedForBossChallengeBadge = true;
 
 		//moves intelligent allies with the hero, preferring closer pos to entrance door
 		int doorPos = pointToCell(new Point(arena.left + arena.width()/2, arena.bottom));

@@ -76,6 +76,7 @@ public class Heap implements Bundlable {
 	public ItemSprite sprite;
 	public boolean seen = false;
 	public boolean haunted = false;
+	public boolean autoExplored = false; //used to determine if this heap should count for exploration bonus
 	
 	public LinkedList<Item> items = new LinkedList<>();
 	
@@ -407,6 +408,7 @@ public class Heap implements Bundlable {
 	private static final String TYPE	= "type";
 	private static final String ITEMS	= "items";
 	private static final String HAUNTED	= "haunted";
+	private static final String AUTO_EXPLORED	= "auto_explored";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -431,7 +433,7 @@ public class Heap implements Bundlable {
 		}
 		
 		haunted = bundle.getBoolean( HAUNTED );
-		
+		autoExplored = bundle.getBoolean( AUTO_EXPLORED );
 	}
 
 	@Override
@@ -441,6 +443,7 @@ public class Heap implements Bundlable {
 		bundle.put( TYPE, type.toString() );
 		bundle.put( ITEMS, items );
 		bundle.put( HAUNTED, haunted );
+		bundle.put( AUTO_EXPLORED, autoExplored );
 	}
 	
 }

@@ -27,6 +27,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.ui.Cursor;
 
 public class InputHandler extends InputAdapter {
 
@@ -90,6 +91,7 @@ public class InputHandler extends InputAdapter {
 	@Override
 	public synchronized boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		ControllerHandler.setControllerPointer(false);
+		ControllerHandler.controllerActive = false;
 		Gdx.input.setOnscreenKeyboardVisible(false); //in-game events never need keyboard, so hide it
 
 		if (button >= 3 && KeyBindings.isKeyBound( button + 1000 )) {

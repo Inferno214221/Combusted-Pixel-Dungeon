@@ -22,10 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.potions;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.Badges;
-import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Fire;
@@ -51,7 +48,7 @@ import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Blindweed;
-import com.shatteredpixel.shatteredpixeldungeon.plants.Dreamfoil;
+import com.shatteredpixel.shatteredpixeldungeon.plants.Mageroyal;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Earthroot;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Fadeleaf;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Firebloom;
@@ -78,6 +75,7 @@ import com.watabou.utils.Reflection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 public class Potion extends Item {
 
@@ -88,7 +86,7 @@ public class Potion extends Item {
 
 	private static final float TIME_TO_DRINK = 1f;
 
-	private static final HashMap<String, Integer> colors = new HashMap<String, Integer>() {
+	private static final LinkedHashMap<String, Integer> colors = new LinkedHashMap<String, Integer>() {
 		{
 			put("crimson",ItemSpriteSheet.POTION_CRIMSON);
 			put("amber",ItemSpriteSheet.POTION_AMBER);
@@ -450,7 +448,7 @@ public class Potion extends Item {
 		public static HashMap<Class<?extends Plant.Seed>, Class<?extends Potion>> types = new HashMap<>();
 		static {
 			types.put(Blindweed.Seed.class,     PotionOfInvisibility.class);
-			types.put(Dreamfoil.Seed.class,     PotionOfPurity.class);
+			types.put(Mageroyal.Seed.class,     PotionOfPurity.class);
 			types.put(Earthroot.Seed.class,     PotionOfParalyticGas.class);
 			types.put(Fadeleaf.Seed.class,      PotionOfMindVision.class);
 			types.put(Firebloom.Seed.class,     PotionOfLiquidFlame.class);

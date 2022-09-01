@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Stamina;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
+import com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
 public class PotionOfStamina extends ExoticPotion {
@@ -39,6 +40,7 @@ public class PotionOfStamina extends ExoticPotion {
 		identify();
 		
 		Buff.affect(hero, Stamina.class, Stamina.DURATION + (5 * Dungeon.hero.pointsInTalent(Talent.POTION_DURATION)));
+		SpellSprite.show(hero, SpellSprite.HASTE, 0.5f, 1, 0.5f);
 	}
 	
 }

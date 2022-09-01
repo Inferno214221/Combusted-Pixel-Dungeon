@@ -42,12 +42,13 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 public class Ring extends KindofMisc {
 	
 	protected Buff buff;
 
-	private static final HashMap<String, Integer> gems = new HashMap<String, Integer>() {
+	private static final LinkedHashMap<String, Integer> gems = new LinkedHashMap<String, Integer>() {
 		{
 			put("garnet",ItemSpriteSheet.RING_GARNET);
 			put("ruby",ItemSpriteSheet.RING_RUBY);
@@ -113,6 +114,10 @@ public class Ring extends KindofMisc {
 	}
 	
 	public void activate( Char ch ) {
+		if (buff != null){
+			buff.detach();
+			buff = null;
+		}
 		buff = buff();
 		buff.attachTo( ch );
 	}
@@ -121,8 +126,10 @@ public class Ring extends KindofMisc {
 	public boolean doUnequip( Hero hero, boolean collect, boolean single ) {
 		if (super.doUnequip( hero, collect, single )) {
 
-			hero.remove( buff );
-			buff = null;
+			if (buff != null) {
+				buff.detach();
+				buff = null;
+			}
 
 			return true;
 

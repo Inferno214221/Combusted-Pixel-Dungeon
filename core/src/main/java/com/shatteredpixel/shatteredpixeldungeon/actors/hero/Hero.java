@@ -30,10 +30,11 @@ import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Alchemy;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SacrificialFire;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AdrenalineSurge;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Amok;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AnkhInvulnerability;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AscensionChallenge;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Awareness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barkskin;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Berserk;
@@ -59,7 +60,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.warrior.En
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Monk;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Snake;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CheckedCell;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
@@ -119,6 +119,7 @@ import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.ShadowCaster;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -130,6 +131,8 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.SurfaceScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.ui.AttackIndicator;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 import com.shatteredpixel.shatteredpixeldungeon.ui.QuickSlotButton;
@@ -137,6 +140,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.StatusPane;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndHero;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndMessage;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndResurrect;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndTradeItem;
 import com.watabou.noosa.Camera;
@@ -151,7 +155,6 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Hero extends Char {
@@ -202,7 +205,7 @@ public class Hero extends Char {
 	private ArrayList<Mob> visibleEnemies;
 
 	//This list is maintained so that some logic checks can be skipped
-	// for enemies we know we aren't seeing normally, resultign in better performance
+	// for enemies we know we aren't seeing normally, resulting in better performance
 	public ArrayList<Mob> mindVisionEnemies = new ArrayList<>();
 
 	public Hero() {
@@ -566,6 +569,8 @@ public class Hero extends Char {
 		if (natStrength != null){
 			speed *= (2f + 0.25f*pointsInTalent(Talent.GROWING_POWER));
 		}
+
+		speed = AscensionChallenge.modifyHeroSpeed(speed);
 		
 		return speed;
 		
@@ -707,11 +712,8 @@ public class Hero extends Char {
 			} else if (curAction instanceof HeroAction.Unlock) {
 				actResult = actUnlock((HeroAction.Unlock) curAction);
 				
-			} else if (curAction instanceof HeroAction.Descend) {
-				actResult = actDescend( (HeroAction.Descend)curAction );
-				
-			} else if (curAction instanceof HeroAction.Ascend) {
-				actResult = actAscend( (HeroAction.Ascend)curAction );
+			} else if (curAction instanceof HeroAction.LvlTransition) {
+				actResult = actTransition( (HeroAction.LvlTransition)curAction );
 				
 			} else if (curAction instanceof HeroAction.Attack) {
 				actResult = actAttack( (HeroAction.Attack)curAction );
@@ -742,6 +744,7 @@ public class Hero extends Char {
 		ready = true;
 
 		AttackIndicator.updateState();
+		BuffIndicator.refreshBoss();
 		
 		GameScene.ready();
 	}
@@ -749,7 +752,7 @@ public class Hero extends Char {
 	public void interrupt() {
 		if (isAlive() && curAction != null &&
 			((curAction instanceof HeroAction.Move && curAction.dst != pos) ||
-			(curAction instanceof HeroAction.Ascend || curAction instanceof HeroAction.Descend))) {
+			(curAction instanceof HeroAction.LvlTransition))) {
 			lastAction = curAction;
 		}
 		curAction = null;
@@ -1004,53 +1007,17 @@ public class Hero extends Char {
 		}
 	}
 	
-	private boolean actDescend( HeroAction.Descend action ) {
+	private boolean actTransition(HeroAction.LvlTransition action ) {
 		int stairs = action.dst;
+		LevelTransition transition = Dungeon.level.getTransition(stairs);
 
 		if (rooted) {
 			Camera.main.shake(1, 1f);
 			ready();
 			return false;
-		//there can be multiple exit tiles, so descend on any of them
-		//TODO this is slightly brittle, it assumes there are no disjointed sets of exit tiles
-		} else if ((Dungeon.level.map[pos] == Terrain.EXIT || Dungeon.level.map[pos] == Terrain.UNLOCKED_EXIT)) {
-			
-			curAction = null;
+		} else if (transition != null && transition.inside(pos)) {
 
-			TimekeepersHourglass.timeFreeze timeFreeze = buff(TimekeepersHourglass.timeFreeze.class);
-			if (timeFreeze != null) timeFreeze.disarmPressedTraps();
-			Swiftthistle.TimeBubble timeBubble = buff(Swiftthistle.TimeBubble.class);
-			if (timeBubble != null) timeBubble.disarmPressedTraps();
-			
-			InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-			Game.switchScene( InterlevelScene.class );
-
-			return false;
-
-		} else if (getCloser( stairs )) {
-
-			return true;
-
-		} else {
-			ready();
-			return false;
-		}
-	}
-	
-	private boolean actAscend( HeroAction.Ascend action ) {
-		int stairs = action.dst;
-
-
-		if (rooted){
-			Camera.main.shake( 1, 1f );
-			ready();
-			return false;
-		//there can be multiple entrance tiles, so descend on any of them
-		//TODO this is slightly brittle, it assumes there are no disjointed sets of entrance tiles
-		} else if (Dungeon.level.map[pos] == Terrain.ENTRANCE) {
-			
-			if (Dungeon.depth == 1) {
-				
+			if (transition.type == LevelTransition.Type.SURFACE){
 				if (belongings.getItem( Amulet.class ) == null) {
 					Game.runOnRenderThread(new Callback() {
 						@Override
@@ -1060,14 +1027,43 @@ public class Hero extends Char {
 					});
 					ready();
 				} else {
+					Statistics.ascended = true;
 					Badges.silentValidateHappyEnd();
 					Dungeon.win( Amulet.class );
 					Dungeon.deleteGame( GamesInProgress.curSlot, true );
 					Game.switchScene( SurfaceScene.class );
 				}
-				
+
+			} else if (transition.type == LevelTransition.Type.REGULAR_ENTRANCE
+					&& Dungeon.depth == 25
+					//ascension challenge only works on runs started on v1.3+
+					&& Dungeon.initialVersion > ShatteredPixelDungeon.v1_2_3
+					&& belongings.getItem(Amulet.class) != null
+					&& buff(AscensionChallenge.class) == null) {
+
+				Game.runOnRenderThread(new Callback() {
+					@Override
+					public void call() {
+						GameScene.show( new WndOptions( new ItemSprite(ItemSpriteSheet.AMULET),
+								Messages.get(Amulet.class, "ascent_title"),
+								Messages.get(Amulet.class, "ascent_desc"),
+								Messages.get(Amulet.class, "ascent_yes"),
+								Messages.get(Amulet.class, "ascent_no")){
+							@Override
+							protected void onSelect(int index) {
+								if (index == 0){
+									Buff.affect(Hero.this, AscensionChallenge.class);
+									Statistics.highestAscent = 25;
+									actTransition(action);
+								}
+							}
+						} );
+					}
+				});
+				ready();
+
 			} else {
-				
+
 				curAction = null;
 
 				TimekeepersHourglass.timeFreeze timeFreeze = buff(TimekeepersHourglass.timeFreeze.class);
@@ -1075,8 +1071,15 @@ public class Hero extends Char {
 				Swiftthistle.TimeBubble timeBubble = buff(Swiftthistle.TimeBubble.class);
 				if (timeBubble != null) timeBubble.disarmPressedTraps();
 
-				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
-				Game.switchScene( InterlevelScene.class );
+				InterlevelScene.curTransition = transition;
+				//TODO probably want to make this more flexible when more types exist
+				if (transition.type == LevelTransition.Type.REGULAR_EXIT) {
+					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
+				} else {
+					InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
+				}
+				Game.switchScene(InterlevelScene.class);
+
 			}
 
 			return false;
@@ -1220,7 +1223,7 @@ public class Hero extends Char {
 		if (!(src instanceof Char)){
 			//reduce damage here if it isn't coming from a character (if it is we already reduced it)
 			if (endure != null){
-				dmg = endure.adjustDamageTaken(dmg);
+				dmg = Math.round(endure.adjustDamageTaken(dmg));
 			}
 			//the same also applies to challenge scroll damage reduction
 			if (buff(ScrollOfChallenge.ChallengeArena.class) != null){
@@ -1327,6 +1330,10 @@ public class Hero extends Char {
 	
 	public Mob visibleEnemy( int index ) {
 		return visibleEnemies.get(index % visibleEnemies.size());
+	}
+
+	public ArrayList<Mob> getVisibleEnemies(){
+		return new ArrayList<>(visibleEnemies);
 	}
 	
 	private boolean walkingToVisibleTrapInFog = false;
@@ -1483,16 +1490,13 @@ public class Hero extends Char {
 			
 			curAction = new HeroAction.Unlock( cell );
 			
-		} else if ((cell == Dungeon.level.exit || Dungeon.level.map[cell] == Terrain.EXIT || Dungeon.level.map[cell] == Terrain.UNLOCKED_EXIT)
-				&& Dungeon.depth < 26) {
+		} else if (Dungeon.level.getTransition(cell) != null
+				&& !Dungeon.level.locked
+				&& (Dungeon.depth < 26 || Dungeon.level.getTransition(cell).type == LevelTransition.Type.REGULAR_ENTRANCE) ) {
+
+			curAction = new HeroAction.LvlTransition( cell );
 			
-			curAction = new HeroAction.Descend( cell );
-			
-		} else if (cell == Dungeon.level.entrance || Dungeon.level.map[cell] == Terrain.ENTRANCE) {
-			
-			curAction = new HeroAction.Ascend( cell );
-			
-		} else  {
+		}  else {
 			
 			if (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell]
 					&& Dungeon.level.traps.get(cell) != null && Dungeon.level.traps.get(cell).visible) {
@@ -1694,6 +1698,15 @@ public class Hero extends Char {
 					}
 				});
 
+				if (cause instanceof Hero.Doom) {
+					((Hero.Doom)cause).onDeath();
+				}
+
+				SacrificialFire.Marked sacMark = buff(SacrificialFire.Marked.class);
+				if (sacMark != null){
+					sacMark.detach();
+				}
+
 			}
 			return;
 		}
@@ -1765,11 +1778,11 @@ public class Hero extends Char {
 				Sample.INSTANCE.play( Assets.Sounds.DEATH );
 			}
 		});
-		
+
 		if (cause instanceof Hero.Doom) {
 			((Hero.Doom)cause).onDeath();
 		}
-		
+
 		Dungeon.deleteGame( GamesInProgress.curSlot, true );
 	}
 
