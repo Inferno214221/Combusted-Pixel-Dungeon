@@ -49,6 +49,7 @@ public class v1_X_Changes {
 
 	public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
 		//add_Coming_Soon(changeInfos);
+		add_v1_3_Changes(changeInfos);
 		add_v1_2_Changes(changeInfos);
 		add_v1_1_Changes(changeInfos);
 		add_v1_0_Changes(changeInfos);
@@ -61,20 +62,20 @@ public class v1_X_Changes {
 		changeInfos.add(changes);
 
 		changes.addButton( new ChangeButton(Icons.get(Icons.SHPX), "Overview",
-			"The next Shattered update will be v1.4.0! After focusing on game porting and multiple smaller additions, v1.4.0 will finally focus on new core game content! I expect v1.4.0 to take about 2 months to complete, as I want to focus primarily on the core content and not overload the update too much with other smaller additions.\n\n" +
-			"I should have some more info on v1.4.0 to share in a blog post some time in August."));
+				"The next Shattered update will be v1.4.0! After focusing on game porting and multiple smaller additions, v1.4.0 will finally focus on new core game content! I expect v1.4.0 to take about 2 months to complete, as I want to focus primarily on the core content and not overload the update too much with other smaller additions.\n\n" +
+						"I should have some more info on v1.4.0 to share in a blog post some time in August."));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.PICKAXE), "Blacksmith Quest",
-			"The main content in v1.4.0 is going to be a total rework to the blacksmith's quest in the caves! Currently the quest is pretty simple, and I'd like to expand it to continue the trend of quests getting progressively more involved. Expect more mining for rare ore and gems, with some greater rewards if you perform well!"));
+				"The main content in v1.4.0 is going to be a total rework to the blacksmith's quest in the caves! Currently the quest is pretty simple, and I'd like to expand it to continue the trend of quests getting progressively more involved. Expect more mining for rare ore and gems, with some greater rewards if you perform well!"));
 
 		changes.addButton( new ChangeButton(Icons.get(Icons.PREFS), "Side Content",
-			"I plan to also have one significant piece of side content in v1.4.0. I haven't yet locked this in, so there are a few possibilities. Expect the side content to be on the scale of a single new item, challenge, or similar."));
+				"I plan to also have one significant piece of side content in v1.4.0. I haven't yet locked this in, so there are a few possibilities. Expect the side content to be on the scale of a single new item, challenge, or similar."));
 
 		changes.addButton( new ChangeButton(Icons.get(Icons.TALENT), "Mechanics Tweaks",
-			"v1.4.0 will also have some tweaks, as usual. In particular I plan to focus on hero talents and some pieces of equipment. Shattered's overall balance is better than it ever has been, but there is always room for more incremental improvements."));
+				"v1.4.0 will also have some tweaks, as usual. In particular I plan to focus on hero talents and some pieces of equipment. Shattered's overall balance is better than it ever has been, but there is always room for more incremental improvements."));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.AMULET), "What About a New Hero?",
-			"Lastly, while this won't be coming in v1.4.0, I am making some progress on adding a new hero in 2022! Expect to hear more on this after v1.4.0 releases!"));
+				"Lastly, while this won't be coming in v1.4.0, I am making some progress on adding a new hero in 2022! Expect to hear more on this after v1.4.0 releases!"));
 
 	}
 

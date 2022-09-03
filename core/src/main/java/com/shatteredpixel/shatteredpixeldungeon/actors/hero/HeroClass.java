@@ -170,12 +170,8 @@ public enum HeroClass {
 
 			case ALCHEMIST:
 				initAlchemist( hero );
-				initDebug(hero);
+				//initDebug(hero);
 				break;
-
-//			case DEBUG:
-//				initDebug( hero );
-//				break;
 		}
 
 		for (int s = 0; s < QuickSlot.SIZE; s++){

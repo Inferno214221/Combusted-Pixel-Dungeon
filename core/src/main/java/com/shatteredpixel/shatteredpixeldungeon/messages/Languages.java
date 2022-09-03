@@ -46,7 +46,6 @@ public enum Languages {
 	//CATALAN("català",     "ca", Status.INCOMPLETE, new String[]{"Illyatwo2"}, new String[]{"Elosy", "n1ngu"})
 	GALICIAN("galego",      "gl", Status.INCOMPLETE, new String[]{"xecarballido"}, null),
 	BASQUE("euskara",       "eu", Status.INCOMPLETE, new String[]{"Deathrevenge", "Osoitz"}, null),
-	GALICIAN("galego",      "gl", Status.UNREVIEWED, new String[]{"xecarballido"}, null),
 	ESPERANTO("esperanto",  "eo", Status.INCOMPLETE, new String[]{"Verdulo"}, new String[]{"Raizin"});
 
 	public enum Status{

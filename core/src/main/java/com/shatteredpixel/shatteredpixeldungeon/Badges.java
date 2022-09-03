@@ -63,7 +63,7 @@ public class Badges {
 		UNLOCK_MAGE                 ( 1 ),
 		UNLOCK_ROGUE                ( 2 ),
 		UNLOCK_HUNTRESS             ( 3 ),
-		UNLOCK_ALCHEMIST			( 20 ),
+		UNLOCK_ALCHEMIST			( 21 ),
 		MONSTERS_SLAIN_1            ( 4 ),
 		MONSTERS_SLAIN_2            ( 5 ),
 		GOLD_COLLECTED_1            ( 6 ),
@@ -109,6 +109,7 @@ public class Badges {
 		BOSS_SLAIN_1_MAGE,
 		BOSS_SLAIN_1_ROGUE,
 		BOSS_SLAIN_1_HUNTRESS,
+		BOSS_SLAIN_1_ALCHEMIST,
 		BOSS_SLAIN_1_ALL_CLASSES    ( 54, true ),
 		GAMES_PLAYED_2              ( 55, true ),
 		HIGH_SCORE_2                ( 56 ),
@@ -141,6 +142,7 @@ public class Badges {
 		BOSS_CHALLENGE_2            ( 84 ),
 		GAMES_PLAYED_3              ( 85, true ),
 		HIGH_SCORE_3                ( 86 ),
+		TOMBS              			( 87),
 
 		//platinum
 		ITEM_LEVEL_5                ( 96 ),
@@ -1105,6 +1107,7 @@ public class Badges {
 			{Badge.BOSS_SLAIN_3, Badge.BOSS_CHALLENGE_3},
 			{Badge.BOSS_SLAIN_4, Badge.BOSS_CHALLENGE_4},
 			{Badge.VICTORY,      Badge.BOSS_CHALLENGE_5},
+			{Badge.BOSS_SLAIN_1_ALL_CLASSES, Badge.BOSS_SLAIN_3_ALL_SUBCLASSES},
 	};
 
 	//If the summary badge is unlocked, don't show the component badges

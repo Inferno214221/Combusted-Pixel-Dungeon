@@ -266,7 +266,7 @@ public class WndSettings extends WndTabbed {
 			chkUnlocked.checked(SPDSettings.allUnlocked());
 			add(chkUnlocked);
 
-			if ((int)Math.ceil(2* Game.density) < PixelScene.maxDefaultZoom) {
+			/*if ((int)Math.ceil(2* Game.density) < PixelScene.maxDefaultZoom) {
 				optScale = new OptionSlider(Messages.get(this, "scale"),
 						(int)Math.ceil(2* Game.density)+ "X",
 						PixelScene.maxDefaultZoom + "X",
@@ -282,7 +282,8 @@ public class WndSettings extends WndTabbed {
 				};
 				optScale.setSelectedValue(PixelScene.defaultZoom);
 				add(optScale);
-			}
+			}*/
+			// Moved to interface tab in shattered 1.13
 
 			if (DeviceCompat.isAndroid() && PixelScene.maxScreenZoom >= 2) {
 				chkSaver = new CheckBox(Messages.get(this, "saver")) {
@@ -395,7 +396,7 @@ public class WndSettings extends WndTabbed {
 			}
 
 			sep2.size(width, 1);
-			sep2.y = bottom + GAP;
+			sep2.y = bottom + GAP + SLIDER_HEIGHT;
 			bottom = sep2.y + 1;
 
 			if (width > 200){

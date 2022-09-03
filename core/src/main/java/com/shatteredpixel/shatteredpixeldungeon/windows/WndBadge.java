@@ -55,7 +55,7 @@ public class WndBadge extends Window {
 		}
 
 		RenderedTextBlock info = PixelScene.renderTextBlock( desc, 6 );
-		info.maxWidth(MAX_WIDTH - MARGIN * 2);
+		info.maxWidth(WIDTH - MARGIN * 2);
 		info.align(RenderedTextBlock.CENTER_ALIGN);
 		if (!unlocked) {
 			info.hardlight( 0x888888 );
