@@ -332,6 +332,10 @@ public enum HeroClass {
 		return Messages.get(HeroClass.class, name()+"_desc");
 	}
 
+	public String shortDesc(){
+		return Messages.get(HeroClass.class, name()+"_desc_short");
+	}
+
 	public HeroSubClass[] subClasses() {
 		return subClasses;
 	}
@@ -381,51 +385,6 @@ public enum HeroClass {
 		}
 	}
 	
-	public String[] perks() {
-		switch (this) {
-			case WARRIOR: default:
-				return new String[]{
-						Messages.get(HeroClass.class, "warrior_perk1"),
-						Messages.get(HeroClass.class, "warrior_perk2"),
-						Messages.get(HeroClass.class, "warrior_perk3"),
-						Messages.get(HeroClass.class, "warrior_perk4"),
-						Messages.get(HeroClass.class, "warrior_perk5"),
-				};
-			case MAGE:
-				return new String[]{
-						Messages.get(HeroClass.class, "mage_perk1"),
-						Messages.get(HeroClass.class, "mage_perk2"),
-						Messages.get(HeroClass.class, "mage_perk3"),
-						Messages.get(HeroClass.class, "mage_perk4"),
-						Messages.get(HeroClass.class, "mage_perk5"),
-				};
-			case ROGUE:
-				return new String[]{
-						Messages.get(HeroClass.class, "rogue_perk1"),
-						Messages.get(HeroClass.class, "rogue_perk2"),
-						Messages.get(HeroClass.class, "rogue_perk3"),
-						Messages.get(HeroClass.class, "rogue_perk4"),
-						Messages.get(HeroClass.class, "rogue_perk5"),
-				};
-			case HUNTRESS:
-				return new String[]{
-						Messages.get(HeroClass.class, "huntress_perk1"),
-						Messages.get(HeroClass.class, "huntress_perk2"),
-						Messages.get(HeroClass.class, "huntress_perk3"),
-						Messages.get(HeroClass.class, "huntress_perk4"),
-						Messages.get(HeroClass.class, "huntress_perk5"),
-				};
-			case ALCHEMIST:
-				return new String[]{
-						Messages.get(HeroClass.class, "alchemist_perk1"),
-						Messages.get(HeroClass.class, "alchemist_perk2"),
-						Messages.get(HeroClass.class, "alchemist_perk3"),
-						Messages.get(HeroClass.class, "alchemist_perk4"),
-						Messages.get(HeroClass.class, "alchemist_perk5"),
-				};
-		}
-	}
-	
 	public boolean isUnlocked(){
 		//always unlock on debug builds
 		if (DeviceCompat.isDebug()) return true;
@@ -445,18 +404,7 @@ public enum HeroClass {
 	}
 	
 	public String unlockMsg() {
-		switch (this){
-			case WARRIOR: default:
-				return "";
-			case MAGE:
-				return Messages.get(HeroClass.class, "mage_unlock");
-			case ROGUE:
-				return Messages.get(HeroClass.class, "rogue_unlock");
-			case HUNTRESS:
-				return Messages.get(HeroClass.class, "huntress_unlock");
-			case ALCHEMIST:
-				return Messages.get(HeroClass.class, "alchemist_unlock");
-		}
+		return shortDesc() + "\n\n" + Messages.get(HeroClass.class, name()+"_unlock");
 	}
 
 }

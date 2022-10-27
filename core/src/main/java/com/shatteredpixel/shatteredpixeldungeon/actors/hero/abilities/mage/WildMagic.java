@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.mage;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
+import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.FlavourBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
@@ -124,7 +125,9 @@ public class WildMagic extends ArmorAbility {
 
 	public static class WildMagicTracker extends FlavourBuff{};
 
-	private void zapWand( ArrayList<Wand> wands, Hero hero, int target){
+	Actor wildMagicActor = null;
+
+	private void zapWand( ArrayList<Wand> wands, Hero hero, int cell){
 		Wand cur = wands.remove(0);
 
 		Ballistica aim = new Ballistica(hero.pos, target, cur.collisionProperties(target));
@@ -158,8 +161,27 @@ public class WildMagic extends ArmorAbility {
 			cur.partialCharge++;
 			cur.curCharges--;
 		}
+		if (wildMagicActor != null){
+			wildMagicActor.next();
+			wildMagicActor = null;
+		}
+
+		Char ch = Actor.findChar(target);
 		if (!wands.isEmpty() && hero.isAlive()) {
-			zapWand(wands, hero, target);
+			Actor.add(new Actor() {
+				{
+					actPriority = VFX_PRIO-1;
+				}
+
+				@Override
+				protected boolean act() {
+					wildMagicActor = this;
+					zapWand(wands, hero, ch == null ? target : ch.pos);
+					Actor.remove(this);
+					return false;
+				}
+			});
+			hero.next();
 		} else {
 			if (hero.buff(WildMagicTracker.class) != null) {
 				hero.buff(WildMagicTracker.class).detach();

@@ -59,6 +59,7 @@ public class EnergyCrystal extends Item {
 	public boolean doPickUp(Hero hero, int pos) {
 
 		Dungeon.energy += quantity;
+		//TODO track energy collected maybe? We do already track recipes crafted though..
 		Dungeon.energy += hero.pointsInTalent(Talent.ALCHEMY_ENERGY);
 		//TODO Statistics.goldCollected += quantity;
 		//Badges.validateGoldCollected();

@@ -25,10 +25,14 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.HuntressArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.MageArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.MailArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.RogueArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ScaleArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.WarriorArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CapeOfThorns;
@@ -61,6 +65,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfToxicGas;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAccuracy;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfArcana;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfElements;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfEnergy;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfEvasion;
@@ -369,11 +374,11 @@ public class Generator {
 			
 			WEP_T1.classes = new Class<?>[]{
 					WornShortsword.class,
-					Gloves.class,
+					MagesStaff.class,
 					Dagger.class,
-					MagesStaff.class
+					Gloves.class
 			};
-			WEP_T1.probs = new float[]{ 1, 1, 1, 0 };
+			WEP_T1.probs = new float[]{ 1, 0, 1, 1 };
 			
 			WEP_T2.classes = new Class<?>[]{
 					Shortsword.class,
@@ -420,8 +425,12 @@ public class Generator {
 					LeatherArmor.class,
 					MailArmor.class,
 					ScaleArmor.class,
-					PlateArmor.class };
-			ARMOR.probs = new float[]{ 0, 0, 0, 0, 0 };
+					PlateArmor.class,
+					WarriorArmor.class,
+					MageArmor.class,
+					RogueArmor.class,
+					HuntressArmor.class};
+			ARMOR.probs = new float[]{ 1, 1, 1, 1, 1, 0, 0, 0, 0 };
 			
 			//see Generator.randomMissile
 			MISSILE.classes = new Class<?>[]{};
@@ -469,6 +478,7 @@ public class Generator {
 			
 			RING.classes = new Class<?>[]{
 					RingOfAccuracy.class,
+					RingOfArcana.class,
 					RingOfEvasion.class,
 					RingOfElements.class,
 					RingOfForce.class,
@@ -479,24 +489,22 @@ public class Generator {
 					RingOfSharpshooting.class,
 					RingOfTenacity.class,
 					RingOfWealth.class};
-			RING.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+			RING.probs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 			
 			ARTIFACT.classes = new Class<?>[]{
-					CapeOfThorns.class,
+					AlchemistsToolkit.class,
 					ChaliceOfBlood.class,
 					CloakOfShadows.class,
+					DriedRose.class,
+					EtherealChains.class,
 					HornOfPlenty.class,
 					MasterThievesArmband.class,
 					SandalsOfNature.class,
 					TalismanOfForesight.class,
 					TimekeepersHourglass.class,
-					UnstableSpellbook.class,
-					AlchemistsToolkit.class,
-					DriedRose.class,
-					LloydsBeacon.class,
-					EtherealChains.class
+					UnstableSpellbook.class
 			};
-			ARTIFACT.defaultProbs = new float[]{ 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1};
+			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 };
 			ARTIFACT.probs = ARTIFACT.defaultProbs.clone();
 		}
 	}
