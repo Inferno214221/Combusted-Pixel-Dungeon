@@ -518,6 +518,7 @@ public class Generator {
 	};
 
 	private static boolean usingFirstDeck = false;
+	private static HashMap<Category,Float> defaultCatProbs = new LinkedHashMap<>();
 	private static HashMap<Category,Float> categoryProbs = new LinkedHashMap<>();
 
 	public static void fullReset() {
@@ -535,6 +536,7 @@ public class Generator {
 	public static void generalReset(){
 		for (Category cat : Category.values()) {
 			categoryProbs.put( cat, usingFirstDeck ? cat.firstProb : cat.secondProb );
+			defaultCatProbs.put( cat, cat.firstProb + cat.secondProb );
 		}
 	}
 
@@ -559,6 +561,10 @@ public class Generator {
 		} else {
 			return random(cat);
 		}
+	}
+
+	public static Item randomUsingDefaults(){
+		return randomUsingDefaults(Random.chances( defaultCatProbs ));
 	}
 	
 	public static Item random( Category cat ) {
