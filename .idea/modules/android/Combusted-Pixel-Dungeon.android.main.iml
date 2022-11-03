@@ -76,15 +76,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Gradle: com.badlogicgames.gdx-controllers:gdx-controllers-core:2.2.3-SNAPSHOT">
+      <library name="Gradle: com.badlogicgames.gdx-controllers:gdx-controllers-core:2.2.2">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx-controllers/gdx-controllers-core/2.2.3-SNAPSHOT/fba95f68d0f36dc3482eb8e9069b643ca999f434/gdx-controllers-core-2.2.3-SNAPSHOT.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx-controllers/gdx-controllers-core/2.2.2/25473efe9273912a03a4871a9e1469b41d86face/gdx-controllers-core-2.2.2.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx-controllers/gdx-controllers-core/2.2.3-SNAPSHOT/343e86266a41c176f803a2197a224d45ef1ecb65/gdx-controllers-core-2.2.3-SNAPSHOT-javadoc.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx-controllers/gdx-controllers-core/2.2.2/135ade612f141004d16bab6b84e74db54fbd5c22/gdx-controllers-core-2.2.2-javadoc.jar!/" />
         </JAVADOC>
         <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx-controllers/gdx-controllers-core/2.2.3-SNAPSHOT/9bdd13403d9f84cd5450de5e91e12c17032f9e22/gdx-controllers-core-2.2.3-SNAPSHOT-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx-controllers/gdx-controllers-core/2.2.2/adab7f5470edfdfdc809aba3c7d0263b5cfaa8cc/gdx-controllers-core-2.2.2-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -102,6 +102,6 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: com.badlogicgames.gdx-controllers:gdx-controllers-android:2.2.3-SNAPSHOT@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.badlogicgames.gdx-controllers:gdx-controllers-android:2.2.2@aar" level="project" />
   </component>
 </module>
