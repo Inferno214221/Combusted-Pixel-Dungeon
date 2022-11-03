@@ -1248,6 +1248,8 @@ public class Hero extends Char {
 		if (buff(TimekeepersHourglass.timeStasis.class) != null)
 			return;
 
+		//regular damage interrupt, triggers on any damage except specific mild DOT effects
+		// unless the player recently hit 'continue moving', in which case this is ignored
 		if (!(src instanceof Hunger || src instanceof Viscosity.DeferedDamage) && damageInterrupt) {
 			interrupt();
 			resting = false;
@@ -1310,6 +1312,10 @@ public class Hero extends Char {
 				} else {
 					Sample.INSTANCE.play(Assets.Sounds.HEALTH_WARN, 1/3f + flashIntensity * 4f);
 				}
+				//hero gets interrupted on taking serious damage, regardless of any other factor
+				interrupt();
+				resting = false;
+				damageInterrupt = true;
 			}
 		}
 	}
