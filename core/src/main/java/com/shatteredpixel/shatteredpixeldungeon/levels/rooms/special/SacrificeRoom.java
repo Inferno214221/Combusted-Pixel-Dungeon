@@ -58,7 +58,8 @@ public class SacrificeRoom extends SpecialRoom {
 		Painter.fill( level, c.x - 1, c.y - 1, 3, 3, Terrain.EMBERS );
 		Painter.set( level, c, Terrain.PEDESTAL );
 
-		Blob.seed( level.pointToCell(c), 6 + Dungeon.depth * 4, SacrificialFire.class, level ).setPrize(prize(level));
+		//Blob.seed( level.pointToCell(c), 6 + Dungeon.depth * 4, SacrificialFire.class, level ).setPrize(prize(level));//WTF??? Cant find this function declared anywhere and it works in shattered
+		Blob.seed( level.pointToCell(c), 6 + Dungeon.depth * 4, SacrificialFire.class, level );
 
 		door.set( Door.Type.EMPTY );
 	}
