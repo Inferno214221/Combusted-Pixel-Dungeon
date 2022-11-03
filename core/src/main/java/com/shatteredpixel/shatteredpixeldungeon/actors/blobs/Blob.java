@@ -34,28 +34,28 @@ public class Blob extends Actor {
 	{
 		actPriority = BLOB_PRIO;
 	}
-	
+
 	public int volume = 0;
-	
+
 	public int[] cur;
 	protected int[] off;
-	
+
 	public BlobEmitter emitter;
 
 	public Rect area = new Rect();
-	
+
 	public boolean alwaysVisible = false;
 
 	private static final String CUR		= "cur";
 	private static final String START	= "start";
 	private static final String LENGTH	= "length";
-	
+
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
-		
+
 		if (volume > 0) {
-		
+
 			int start;
 			for (start=0; start < Dungeon.level.length(); start++) {
 				if (cur[start] > 0) {
@@ -68,24 +68,24 @@ public class Blob extends Actor {
 					break;
 				}
 			}
-			
+
 			bundle.put( START, start );
 			bundle.put( LENGTH, cur.length );
 			bundle.put( CUR, trim( start, end + 1 ) );
-			
+
 		}
 	}
-	
+
 	private int[] trim( int start, int end ) {
 		int len = end - start;
 		int[] copy = new int[len];
 		System.arraycopy( cur, start, copy, 0, len );
 		return copy;
 	}
-	
+
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
-		
+
 		super.restoreFromBundle( bundle );
 
 		if (bundle.contains( CUR )) {
@@ -102,12 +102,12 @@ public class Blob extends Actor {
 
 		}
 	}
-	
+
 	@Override
 	public boolean act() {
-		
+
 		spend( TICK );
-		
+
 		if (volume > 0) {
 
 			if (area.isEmpty())
@@ -119,7 +119,7 @@ public class Blob extends Actor {
 			int[] tmp = off;
 			off = cur;
 			cur = tmp;
-			
+
 		} else {
 			if (!area.isEmpty()) {
 				area.setEmpty();
@@ -127,7 +127,7 @@ public class Blob extends Actor {
 				System.arraycopy(cur, 0, off, 0, cur.length);
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -138,13 +138,13 @@ public class Blob extends Actor {
 			}
 		}
 	}
-	
+
 	public void use( BlobEmitter emitter ) {
 		this.emitter = emitter;
 	}
-	
+
 	protected void evolve() {
-		
+
 		boolean[] blocking = Dungeon.level.solid;
 		int cell;
 		for (int i=area.top-1; i <= area.bottom; i++) {
@@ -205,7 +205,7 @@ public class Blob extends Actor {
 
 		area.union(cell%level.width(), cell/level.width());
 	}
-	
+
 	public void clear( int cell ) {
 		if (volume == 0) return;
 		volume -= cur[cell];
@@ -222,20 +222,20 @@ public class Blob extends Actor {
 	public void onBuildFlagMaps( Level l ){
 		//do nothing by default, only some blobs affect flags
 	}
-	
+
 	public String tileDesc() {
 		return null;
 	}
-	
+
 	public static<T extends Blob> T seed( int cell, int amount, Class<T> type ) {
 		return seed(cell, amount, type, Dungeon.level);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static<T extends Blob> T seed( int cell, int amount, Class<T> type, Level level ) {
-		
+
 		T gas = (T)level.blobs.get( type );
-		
+
 		if (gas == null) {
 			gas = Reflection.newInstance(type);
 			//this ensures that gasses do not get an 'extra turn' if they are added by a mob or buff
@@ -243,12 +243,12 @@ public class Blob extends Actor {
 				gas.spend(1f);
 			}
 		}
-		
+
 		if (gas != null){
 			level.blobs.put( type, gas );
 			gas.seed( level, cell, amount );
 		}
-		
+
 		return gas;
 	}
 

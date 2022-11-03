@@ -38,8 +38,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Wraith;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.SacrificialParticle;
-import com.shatteredpixel.shatteredpixeldungeon.items.Item;
-import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SacrificeRoom;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
@@ -61,8 +59,6 @@ public class SacrificialFire extends Blob {
 	// The limit is to prevent farming
 	private int bonusSpawns = 3;
 
-	private Item prize;
-
 	@Override
 	protected void evolve() {
 		int cell;
@@ -81,16 +77,12 @@ public class SacrificialFire extends Blob {
 						Buff.prolong( ch, Marked.class, Marked.DURATION );
 					}
 
-						if (off[cell] > 0 && Dungeon.level.heroFOV[cell]) {
-
-							Notes.add( Notes.Landmark.SACRIFICIAL_FIRE);
-
-							if (Dungeon.level.mobCount() == 0
-									&& bonusSpawns > 0) {
-								if (Dungeon.level.spawnMob(4)) {
-									bonusSpawns--;
-								}
-							}
+					if (off[cell] > 0
+							&& Dungeon.level.heroFOV[cell]
+							&& Dungeon.level.mobCount() == 0
+							&& bonusSpawns > 0){
+						if (Dungeon.level.spawnMob(4)) {
+							bonusSpawns--;
 						}
 					}
 				}
@@ -118,31 +110,25 @@ public class SacrificialFire extends Blob {
 	}
 
 	private static final String BONUS_SPAWNS = "bonus_spawns";
-	private static final String PRIZE = "prize";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
 		bundle.put(BONUS_SPAWNS, bonusSpawns);
-		bundle.put(PRIZE, prize);
 	}
 
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
 		bonusSpawns = bundle.getInt(BONUS_SPAWNS);
-		if (bundle.contains(PRIZE)) prize = (Item) bundle.get(PRIZE);
 	}
 
-	public void setPrize( Item prize ){
-		this.prize = prize;
-	}
+	public static void sacrifice( Char ch ) {
 
-	public void sacrifice( Char ch ) {
-
+		SacrificialFire fire = (SacrificialFire)Dungeon.level.blobs.get( SacrificialFire.class );
 		int firePos = -1;
 		for (int i : PathFinder.NEIGHBOURS9){
-			if (volume > 0 && cur[ch.pos+i] > 0){
+			if (fire != null && fire.volume > 0 && fire.cur[ch.pos+i] > 0){
 				firePos = ch.pos+i;
 				break;
 			}
@@ -170,17 +156,16 @@ public class SacrificialFire extends Blob {
 
 			if (exp > 0) {
 
-				int volumeLeft = cur[firePos] - exp;
-				if (volumeLeft > 0) {
-					cur[firePos] -= exp;
-					volume -= exp;
-					bonusSpawns++;
-					CellEmitter.get(firePos).burst( SacrificialParticle.FACTORY, 20 );
+				int volume = fire.cur[ch.pos] - exp;
+				if (volume > 0) {
+					fire.cur[ch.pos] -= exp;
+					fire.volume -= exp;
+					fire.bonusSpawns++;
+					CellEmitter.get(ch.pos).burst( SacrificialParticle.FACTORY, 20 );
 					Sample.INSTANCE.play(Assets.Sounds.BURNING );
 					GLog.w( Messages.get(SacrificialFire.class, "worthy"));
 				} else {
-					clear(firePos);
-					Notes.remove(Notes.Landmark.SACRIFICIAL_FIRE);
+					fire.clear(ch.pos);
 
 					for (int i : PathFinder.NEIGHBOURS9){
 						CellEmitter.get(ch.pos+i).burst( SacrificialParticle.FACTORY, 20 );
@@ -189,11 +174,7 @@ public class SacrificialFire extends Blob {
 					Sample.INSTANCE.play(Assets.Sounds.BURNING );
 					Sample.INSTANCE.play(Assets.Sounds.BURNING );
 					GLog.w( Messages.get(SacrificialFire.class, "reward"));
-					if (prize != null) {
-						Dungeon.level.drop(prize, firePos).sprite.drop();
-					} else {
-						Dungeon.level.drop(SacrificeRoom.prize(Dungeon.level), firePos).sprite.drop();
-					}
+					Dungeon.level.drop( SacrificeRoom.prize( Dungeon.level ), ch.pos ).sprite.drop();
 				}
 			} else {
 
@@ -210,10 +191,7 @@ public class SacrificialFire extends Blob {
 		@Override
 		public void detach() {
 			if (!target.isAlive()) {
-				SacrificialFire fire = (SacrificialFire) Dungeon.level.blobs.get(SacrificialFire.class);
-				if (fire != null) {
-					fire.sacrifice(target);
-				}
+				sacrifice( target );
 			}
 			super.detach();
 		}

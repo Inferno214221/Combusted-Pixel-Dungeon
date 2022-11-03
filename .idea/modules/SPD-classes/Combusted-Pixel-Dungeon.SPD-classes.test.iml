@@ -9,7 +9,7 @@
     <orderEntry type="module" module-name="Combusted-Pixel-Dungeon.SPD-classes.main" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-freetype:1.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx:1.11.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.badlogicgames.gdx-controllers:gdx-controllers-core:2.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.badlogicgames.gdx-controllers:gdx-controllers-core:2.2.3-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: org.json:json:20170516" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-jnigen-loader:2.3.1" level="project" />
   </component>
