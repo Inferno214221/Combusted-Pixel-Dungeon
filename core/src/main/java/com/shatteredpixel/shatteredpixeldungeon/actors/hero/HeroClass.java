@@ -127,12 +127,12 @@ public enum HeroClass {
 				break;
 		}
 
-		if (SPDSettings.debugScroll()) initDebug(hero);
-
-		for (int s = 0; s < QuickSlot.SIZE; s++){
-			if (Dungeon.quickslot.getItem(s) == null){
-				Dungeon.quickslot.setSlot(s, waterskin);
-				break;
+		if (SPDSettings.quickslotWaterskin()) {
+			for (int s = 0; s < QuickSlot.SIZE; s++) {
+				if (Dungeon.quickslot.getItem(s) == null) {
+					Dungeon.quickslot.setSlot(s, waterskin);
+					break;
+				}
 			}
 		}
 
