@@ -201,9 +201,9 @@ public class Dungeon {
 	public static int gold;
 	public static int energy;
 
-	public static boolean first_alterlocation;
-	public static boolean second_alterlocation;
-	public static boolean third_alterlocation;
+	public static boolean firstAlterlocation;
+	public static boolean secondAlterlocation;
+	public static boolean thirdAlterlocation;
 	
 	public static HashSet<Integer> chapters;
 
@@ -269,9 +269,12 @@ public class Dungeon {
 		gold = 0;
 		energy = 0;
 
-		first_alterlocation = Random.Boolean();
-		second_alterlocation = Random.Boolean();
-		third_alterlocation = Random.Boolean();
+//		firstAlterlocation = Random.Boolean();
+//		secondAlterlocation = Random.Boolean();
+//		thirdAlterlocation = Random.Boolean();
+		firstAlterlocation = (seed % 2 == 1);
+		secondAlterlocation = (seed % 4 >= 2);
+		thirdAlterlocation = (seed % 8 >= 4);
 
 		droppedItems = new SparseArray<>();
 		portedItems = new SparseArray<>();
@@ -328,28 +331,28 @@ public class Dungeon {
 				case 7:
 				case 8:
 				case 9:
-					level = first_alterlocation ? new NecropolisLevel() : new PrisonLevel();
+					level = firstAlterlocation ? new NecropolisLevel() : new PrisonLevel();
 					break;
 				case 10:
-					level = first_alterlocation ? new NecropolisBossLevel() :  new PrisonBossLevel();
+					level = firstAlterlocation ? new NecropolisBossLevel() :  new PrisonBossLevel();
 					break;
 				case 11:
 				case 12:
 				case 13:
 				case 14:
-					level = second_alterlocation ? new IceCavesLevel() : new CavesLevel();
+					level = secondAlterlocation ? new IceCavesLevel() : new CavesLevel();
 					break;
 				case 15:
-					level = second_alterlocation ? new IceCavesBossLevel() : new CavesBossLevel();
+					level = secondAlterlocation ? new IceCavesBossLevel() : new CavesBossLevel();
 					break;
 				case 16:
 				case 17:
 				case 18:
 				case 19:
-					level = third_alterlocation ? new SpiderNestLevel() : new CityLevel();
+					level = thirdAlterlocation ? new SpiderNestLevel() : new CityLevel();
 					break;
 				case 20:
-					level = third_alterlocation ? new SpiderNestBossLevel() : new CityBossLevel();
+					level = thirdAlterlocation ? new SpiderNestBossLevel() : new CityBossLevel();
 					break;
 				case 21:
 				case 22:

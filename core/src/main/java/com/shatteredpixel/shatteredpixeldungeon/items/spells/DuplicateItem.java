@@ -5,13 +5,16 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Enchanting;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfMight;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfDivineInspiration;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfMastery;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMirrorImage;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfMetamorphosis;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
@@ -36,8 +39,8 @@ public class DuplicateItem extends Spell{
 
     protected boolean usableOnItem(Item item) {
         return item instanceof MissileWeapon ||
-                (item instanceof Potion && !(item instanceof PotionOfStrength || item instanceof PotionOfMastery || item instanceof ElixirOfMight)) ||
-                (item instanceof Scroll && !(item instanceof ScrollOfUpgrade || item instanceof ScrollOfEnchantment)) ||
+                (item instanceof Potion && !(item instanceof PotionOfStrength || item instanceof PotionOfMastery || item instanceof ElixirOfMight || item instanceof PotionOfExperience || item instanceof PotionOfDivineInspiration)) ||
+                (item instanceof Scroll && !(item instanceof ScrollOfUpgrade || item instanceof ScrollOfEnchantment || item instanceof ScrollOfTransmutation || item instanceof ScrollOfMetamorphosis)) ||
                 item instanceof Plant.Seed ||
                 item instanceof Runestone;
     }
