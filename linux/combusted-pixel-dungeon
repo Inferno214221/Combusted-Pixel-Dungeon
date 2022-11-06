@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+java -jar "/usr/share/combusted-pixel-dungeon/combusted-pixel-dungeon.jar"

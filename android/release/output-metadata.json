@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.inferno.combustedpixeldungeon2",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 670,
+      "versionName": "0.24.0",
+      "outputFile": "android-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

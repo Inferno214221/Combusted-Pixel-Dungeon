@@ -1,6 +1,6 @@
 # Combusted Pixel Dungeon
 
-Combusted Pixel Dungeon is a Roguelike RPG, with randomly generated levels, items, enemies, and traps! Based on the [source code of Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), by [Evan-00](https://www.patreon.com/ShatteredPixel) which is based on the [source code of Pixel Dungeon](https://github.com/00-Evan/pixel-dungeon-gradle), by [Watabou](https://www.watabou.ru).
+Combusted Pixel Dungeon is a Roguelike RPG, with randomly generated levels, items, enemies, and traps! Based on the [source code of Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), by [00-Evan](https://www.patreon.com/ShatteredPixel) which is based on the [source code of Pixel Dungeon](https://github.com/00-Evan/pixel-dungeon-gradle), by [Watabou](https://www.watabou.ru).
 
 Ideas, Assets, and code have been implemented from:
 - [Summoning Pixel Dungeon](https://github.com/TrashboxBobylev/Summoning-Pixel-Dungeon).
@@ -20,11 +20,10 @@ Potential future changes might implement:
 - More Weapons
 - Throwable Melee Weapons
 - New Potions, Scrolls & Alchemy Options
-- New Playable Classes:
-  - Cleric?
+- New Playable Classes?
 - A Story Mode? (Preset large, open-world map)
 
-Check out Shattered Pixel Dungeon at [ShatteredPixel.com](https://www.shatteredpixel.com) and [support it's creator on Patreon](https://www.patreon.com/ShatteredPixel)!
+Check out Shattered Pixel Dungeon at [ShatteredPixel.com](https://www.shatteredpixel.com) and [support 00-Evan creator on Patreon](https://www.patreon.com/ShatteredPixel)!
 
 Note that **this repository does not accept pull requests!** The code here is provided in hopes that others may find it useful for their own projects, not to allow community contribution. Issue reports of all kinds (bug reports, feature requests, etc.) are welcome.
 
@@ -34,7 +33,11 @@ Note that **this repository does not accept pull requests!** The code here is pr
 
 Download the .jar file available [here](https://github.com/Inferno214221/Combusted-Pixel-Dungeon/releases/latest). Make sure you have [JRE](https://www.oracle.com/java/technologies/downloads/) installed to run it.
 
+#### Android / ChromeOS:
 Download and install the .apk file available [here](https://github.com/Inferno214221/Combusted-Pixel-Dungeon/releases/latest).
+
+#### Linux (Any Distro):
+Download and install the .tar.xz file available [here](https://github.com/Inferno214221/Combusted-Pixel-Dungeon/releases/latest). Then extract it and `chmod +x ./install.sh && ./install.sh`.
 
 # Modding the Game
 

@@ -14,8 +14,8 @@ allprojects {
         appName = 'Combusted Pixel Dungeon'
         appPackageName = 'com.inferno.combustedpixeldungeon'
 
-        appVersionCode = 637
-        appVersionName = '0.0.24'
+        appVersionCode = 670
+        appVersionName = '0.24.0'
 
         appJavaCompatibility = JavaVersion.VERSION_1_8
 
@@ -24,7 +24,7 @@ allprojects {
         appAndroidTargetSDK = 31
 
         gdxVersion = '1.11.0'
-        gdxControllersVersion = '2.2.2'
+        gdxControllersVersion = '2.2.3-SNAPSHOT'
         robovmVersion = '2.3.16'
     }
     version = appVersionName

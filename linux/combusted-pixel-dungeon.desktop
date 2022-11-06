@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=0.24
+Name=Combusted Pixel Dungeon
+Comment=Fork of Shattered Pixel Dungeon
+Exec=combusted-pixel-dungeon
+Icon=/usr/share/combusted-pixel-dungeon/combusted-pixel-dungeon.png
+Terminal=false
+Categories=Game;
