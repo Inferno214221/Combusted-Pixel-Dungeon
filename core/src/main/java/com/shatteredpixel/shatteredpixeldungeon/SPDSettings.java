@@ -426,4 +426,10 @@ public class SPDSettings extends GameSettings {
 
 	public static boolean allUnlocked() { return getBoolean( ALL_UNLOCKED, false); }
 
+	public static final String DEBUG_SCROLL 	= "debug_scroll";
+
+	public static void debugScroll( boolean value ) { put( DEBUG_SCROLL, value); }
+
+	public static boolean debugScroll() { return getBoolean( DEBUG_SCROLL, false); }
+
 }
