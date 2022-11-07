@@ -4,7 +4,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 
 import java.util.ArrayList;
 
-public class ThrownWeapon extends MissileWeapon{
+abstract public class ThrownWeapon extends MissileWeapon{
     {
         stackable = true;
         levelKnown = true;

@@ -22,11 +22,13 @@ import com.shatteredpixel.shatteredpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 // needed for HelpWindow
+import com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
@@ -40,6 +42,7 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput;
 // Output
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 
+import com.watabou.noosa.Game;
 import com.watabou.noosa.ui.Component;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Reflection;
@@ -113,7 +116,13 @@ public class ScrollOfDebug extends Scroll {
                 "Specifying \"inv\" (or \"i\") will have the game prompt you to select an item from your inventory.",
                 "Specifying \"cell\" (or \"c\") will allow you to select a tile. ",
                 "When selecting a cell, you may or may not be able to directly select things in the tile you select, depending on the Scroll of Debug implementation.",
-                "Please note that variables are not saved when you close the game."
+                "Please note that variables are not saved when you close the game."),
+        DESCEND(null,
+                "",
+                "Descend to the entrance of the next floor."),
+        ASCEND(null,
+                "",
+                "Ascend to the exit of the previous floor."
         );
 
         final Class<?> paramClass;
@@ -254,6 +263,17 @@ public class ScrollOfDebug extends Scroll {
                         output = builder.toString().trim();
                     }
                     GameScene.show(new HelpWindow(output));
+                } else if(command == Command.DESCEND) {
+                    hero.curAction = null;
+                    LevelTransition transition = Dungeon.level.getTransition(LevelTransition.Type.REGULAR_EXIT);
+                    InterlevelScene.curTransition = transition;
+                    InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
+                    Game.switchScene(InterlevelScene.class);
+                } else if(command == Command.ASCEND) {
+                    InterlevelScene.mode = InterlevelScene.Mode.RETURN;
+                    InterlevelScene.returnDepth = Dungeon.depth -1;
+                    InterlevelScene.returnPos = -1;
+                    Game.switchScene(InterlevelScene.class);
                 } else if(input.length > 1) {
                     Object storedVariable = Variable.get(input[1]);
                     Class _cls = storedVariable != null ? storedVariable.getClass()
