@@ -40,7 +40,7 @@ public enum Icons {
 	PREFS,
 	SHPX,
 	CBPX,
-	RRPX,
+	RPX,
 
 	//rankings and hero select icons, spacing for 16x16
 	STAIRS,
@@ -157,8 +157,8 @@ public enum Icons {
 			case CBPX:
 				icon.frame( icon.texture.uvRectBySize( 152, 0, 18, 16 ) );
 				break;
-			case RRPX:
-				icon.frame( icon.texture.uvRectBySize( 170, 0, 16, 16 ) );
+			case RPX:
+				icon.frame( icon.texture.uvRectBySize( 170, 0, 17, 13 ) );
 				break;
 
 			case STAIRS:

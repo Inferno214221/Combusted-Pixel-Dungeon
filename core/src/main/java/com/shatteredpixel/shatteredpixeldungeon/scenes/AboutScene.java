@@ -92,18 +92,18 @@ public class AboutScene extends PixelScene {
 		//insp.hardlight(CBPX_COLOR);
 		content.add(insp);
 
-		CreditsBlock rrpx = new CreditsBlock(true, Window.TITLE_COLOR,
-				"Re-Remixed Pixel Dungeon",
-				Icons.RRPX.get(),
-				"Developed by: _QuasiStellar_\nBased on ShatteredPD's open source",//\nInspired by Remixed Dungeon by Nyrds
-				"quasistellar.org",
-				"https://quasistellar.neocities.org/");
+		CreditsBlock rpx = new CreditsBlock(true, Window.TITLE_COLOR,
+				"Remixed Pixel Dungeon",
+				Icons.RPX.get(),
+				"Developed by: _NYRDS_\nBased on Pixel Dungeon's open source",//\nInspired by Remixed Dungeon by Nyrds
+				"wiki.nyrds.net",
+				"http://wiki.nyrds.net/");
 		if (landscape()){
-			rrpx.setRect((w - fullWidth)/2f - 6, insp.bottom()+4, 120, 0);
+			rpx.setRect((w - fullWidth)/2f - 6, insp.bottom()+4, 120, 0);
 		} else {
-			rrpx.setRect((w - fullWidth)/2f, insp.bottom()+4, 120, 0);
+			rpx.setRect((w - fullWidth)/2f, insp.bottom()+4, 120, 0);
 		}
-		content.add(rrpx);
+		content.add(rpx);
 
 		CreditsBlock supx = new CreditsBlock(true, Window.TITLE_COLOR,
 				"Summoning Pixel Dungeon",
@@ -112,11 +112,11 @@ public class AboutScene extends PixelScene {
 				"reddit: u/TrashboxBobylev",
 				"https://reddit.com/u/TrashboxBobylev");
 		if (landscape()){
-			supx.setRect(rrpx.right(), rrpx.top(), 120, 0);
+			supx.setRect(rpx.right(), rpx.top(), 120, 0);
 			content.add(supx);
 			addLine(supx.bottom() + 13, content);
 		} else {
-			supx.setRect((w - fullWidth)/2f, rrpx.bottom()+8, 120, 0);
+			supx.setRect((w - fullWidth)/2f, rpx.bottom()+8, 120, 0);
 			content.add(supx);
 			addLine(supx.bottom() + 4, content);
 		}
@@ -136,7 +136,7 @@ public class AboutScene extends PixelScene {
 				"ShatteredPixel.com",
 				shpxLink);
 		if (landscape()){
-			shpx.setRect((w - fullWidth)/2f - 6, rrpx.bottom()+8, 120, 0);
+			shpx.setRect((w - fullWidth)/2f - 6, rpx.bottom()+16, 120, 0);
 		} else {
 			shpx.setRect((w - fullWidth)/2f, supx.bottom()+8, 120, 0);
 		}
