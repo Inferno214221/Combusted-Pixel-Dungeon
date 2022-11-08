@@ -48,7 +48,7 @@ public enum Icons {
 	MAGE,
 	ROGUE,
 	HUNTRESS,
-	ALCHEMIST,
+	DUELIST,
 
 	//grey icons, mainly used for buttons, spacing for 16x16
 	EXIT,
@@ -176,8 +176,8 @@ public enum Icons {
 			case HUNTRESS:
 				icon.frame( icon.texture.uvRectBySize( 64, 16, 16, 16 ) );
 				break;
-			case ALCHEMIST:
-				icon.frame( icon.texture.uvRectBySize( 80, 16, 16, 16 ) );
+			case DUELIST:
+				icon.frame( icon.texture.uvRectBySize( 80, 16, 13, 14 ) );
 				break;
 
 			case EXIT:
@@ -407,18 +407,18 @@ public enum Icons {
 	
 	public static Image get( HeroClass cl ) {
 		switch (cl) {
-		case WARRIOR:
-			return get( WARRIOR );
-		case MAGE:
-			return get( MAGE );
-		case ROGUE:
-			return get( ROGUE );
-		case HUNTRESS:
-			return get( HUNTRESS );
-		case ALCHEMIST:
-			return get( ALCHEMIST );
-		default:
-			return null;
+			case WARRIOR:
+				return get( Icons.WARRIOR );
+			case MAGE:
+				return get( Icons.MAGE );
+			case ROGUE:
+				return get( Icons.ROGUE );
+			case HUNTRESS:
+				return get( Icons.HUNTRESS );
+			case DUELIST:
+				return get( Icons.DUELIST );
+			default:
+				return null;
 		}
 	}
 

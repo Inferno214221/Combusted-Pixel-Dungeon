@@ -56,9 +56,11 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMirrorImage;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
@@ -66,6 +68,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Rapier;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingStone;
@@ -81,7 +84,7 @@ public enum HeroClass {
 	MAGE( HeroSubClass.BATTLEMAGE, HeroSubClass.WARLOCK ),
 	ROGUE( HeroSubClass.ASSASSIN, HeroSubClass.FREERUNNER ),
 	HUNTRESS( HeroSubClass.SNIPER, HeroSubClass.WARDEN ),
-	ALCHEMIST( HeroSubClass.NONE, HeroSubClass.NONE );
+	DUELIST( );
 
 	private HeroSubClass[] subClasses;
 
@@ -122,8 +125,8 @@ public enum HeroClass {
 				initHuntress( hero );
 				break;
 
-			case ALCHEMIST:
-				initAlchemist( hero );
+			case DUELIST:
+				initDuelist( hero );
 				break;
 		}
 
@@ -148,8 +151,8 @@ public enum HeroClass {
 				return Badges.Badge.MASTERY_ROGUE;
 			case HUNTRESS:
 				return Badges.Badge.MASTERY_HUNTRESS;
-			case ALCHEMIST:
-				return Badges.Badge.MASTERY_ALCHEMIST;
+			case DUELIST:
+				return Badges.Badge.MASTERY_DUELIST;
 		}
 		return null;
 	}
@@ -222,30 +225,15 @@ public enum HeroClass {
 		new ScrollOfLullaby().identify();
 	}
 
-	private static void initAlchemist( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword()).identify();
+	private static void initDuelist( Hero hero ) {
 
-		AlchemistsToolkit toolkit = new AlchemistsToolkit();
-		(hero.belongings.artifact = toolkit).identify();
-		hero.belongings.artifact.activate( hero );
+		(hero.belongings.weapon = new Rapier()).identify();
 
-		ThrowingKnife knives = new ThrowingKnife();
-		knives.quantity(3).collect();
+		//quickslot and thrown weapons?
+		//Dungeon.quickslot.setSlot(0, hero.belongings.weapon);
 
-		Dungeon.quickslot.setSlot(0, knives);
-
-		new PotionBandolier().collect();
-		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
-
-		new PotionOfLiquidFlame().identify();
-		new PotionOfHealing().identify();
-		new AlchemicalCatalyst().collect();
-	}
-
-	private static void initDebug( Hero hero ) {
-		ScrollOfDebug debug = new ScrollOfDebug();
-		Dungeon.hero.belongings.backpack.items.add(debug);
-		Dungeon.quickslot.setSlot(Dungeon.quickslot.SIZE - 1, debug);
+		new PotionOfStrength().identify();
+		new ScrollOfMirrorImage().identify();
 	}
 
 	public String title() {
@@ -274,8 +262,8 @@ public enum HeroClass {
 				return new ArmorAbility[]{new SmokeBomb(), new DeathMark(), new ShadowClone()};
 			case HUNTRESS:
 				return new ArmorAbility[]{new SpectralBlades(), new NaturesPower(), new SpiritHawk()};
-			case ALCHEMIST:
-				return new ArmorAbility[]{new ElementalBlast(), new WildMagic(), new WarpBeacon()};
+			case DUELIST:
+				return new ArmorAbility[]{};
 		}
 	}
 
@@ -289,8 +277,8 @@ public enum HeroClass {
 				return Assets.Sprites.ROGUE;
 			case HUNTRESS:
 				return Assets.Sprites.HUNTRESS;
-			case ALCHEMIST:
-				return Assets.Sprites.ALCHEMIST;
+			case DUELIST:
+				return Assets.Sprites.DUELIST;
 		}
 	}
 
@@ -304,8 +292,8 @@ public enum HeroClass {
 				return Assets.Splashes.ROGUE;
 			case HUNTRESS:
 				return Assets.Splashes.HUNTRESS;
-			case ALCHEMIST:
-				return Assets.Splashes.ALCHEMIST;
+			case DUELIST:
+				return Assets.Splashes.DUELIST;
 		}
 	}
 	
@@ -321,9 +309,9 @@ public enum HeroClass {
 			case ROGUE:
 				return Badges.isUnlocked(Badges.Badge.UNLOCK_ROGUE) || SPDSettings.allUnlocked();
 			case HUNTRESS:
-				return Badges.isUnlocked(Badges.Badge.UNLOCK_HUNTRESS) || SPDSettings.allUnlocked();
-			case ALCHEMIST:
-				return Badges.isUnlocked(Badges.Badge.UNLOCK_ALCHEMIST) || SPDSettings.allUnlocked();
+				return Badges.isUnlocked(Badges.Badge.UNLOCK_HUNTRESS);
+			case DUELIST:
+				return Badges.isUnlocked(Badges.Badge.UNLOCK_DUELIST);
 		}
 	}
 	

@@ -29,7 +29,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
-import com.shatteredpixel.shatteredpixeldungeon.items.journal.AlchemyPage;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Document;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.LaboratoryRoom;
@@ -56,31 +56,32 @@ public class Badges {
 		MASTERY_MAGE,
 		MASTERY_ROGUE,
 		MASTERY_HUNTRESS,
-		MASTERY_ALCHEMIST,
+		MASTERY_DUELIST,
 		FOUND_RATMOGRIFY,
 
 		//bronze
 		UNLOCK_MAGE                 ( 1 ),
 		UNLOCK_ROGUE                ( 2 ),
 		UNLOCK_HUNTRESS             ( 3 ),
-		UNLOCK_ALCHEMIST			( 21 ),
-		MONSTERS_SLAIN_1            ( 4 ),
-		MONSTERS_SLAIN_2            ( 5 ),
-		GOLD_COLLECTED_1            ( 6 ),
-		GOLD_COLLECTED_2            ( 7 ),
-		ITEM_LEVEL_1                ( 8 ),
-		LEVEL_REACHED_1             ( 9 ),
-		STRENGTH_ATTAINED_1         ( 10 ),
-		FOOD_EATEN_1                ( 11 ),
-		ITEMS_CRAFTED_1             ( 12 ),
-		BOSS_SLAIN_1                ( 13 ),
-		DEATH_FROM_FIRE             ( 14 ),
-		DEATH_FROM_POISON           ( 15 ),
-		DEATH_FROM_GAS              ( 16 ),
-		DEATH_FROM_HUNGER           ( 17 ),
-		DEATH_FROM_FALLING          ( 18 ),
-		GAMES_PLAYED_1              ( 19, true ),
-		HIGH_SCORE_1                ( 20 ),
+		UNLOCK_DUELIST              ( 4 ),
+		//UNLOCK_CLERIC             ( 5 ),
+		MONSTERS_SLAIN_1            ( 6 ),
+		MONSTERS_SLAIN_2            ( 7 ),
+		GOLD_COLLECTED_1            ( 8 ),
+		GOLD_COLLECTED_2            ( 9 ),
+		ITEM_LEVEL_1                ( 10 ),
+		LEVEL_REACHED_1             ( 11 ),
+		STRENGTH_ATTAINED_1         ( 12 ),
+		FOOD_EATEN_1                ( 13 ),
+		ITEMS_CRAFTED_1             ( 14 ),
+		BOSS_SLAIN_1                ( 15 ),
+		DEATH_FROM_FIRE             ( 16 ),
+		DEATH_FROM_POISON           ( 17 ),
+		DEATH_FROM_GAS              ( 18 ),
+		DEATH_FROM_HUNGER           ( 19 ),
+		DEATH_FROM_FALLING          ( 20 ),
+		GAMES_PLAYED_1              ( 21, true ),
+		HIGH_SCORE_1                ( 22 ),
 
 		//silver
 		NO_MONSTERS_SLAIN           ( 32 ),
@@ -109,7 +110,7 @@ public class Badges {
 		BOSS_SLAIN_1_MAGE,
 		BOSS_SLAIN_1_ROGUE,
 		BOSS_SLAIN_1_HUNTRESS,
-		BOSS_SLAIN_1_ALCHEMIST,
+		BOSS_SLAIN_1_DUELIST,
 		BOSS_SLAIN_1_ALL_CLASSES    ( 54, true ),
 		GAMES_PLAYED_2              ( 55, true ),
 		HIGH_SCORE_2                ( 56 ),
@@ -156,6 +157,7 @@ public class Badges {
 		VICTORY_MAGE,
 		VICTORY_ROGUE,
 		VICTORY_HUNTRESS,
+		VICTORY_DUELIST,
 		VICTORY_ALL_CLASSES         ( 103, true ),
 		DEATH_FROM_ALL              ( 104, true ),
 		BOSS_SLAIN_3_GLADIATOR,
@@ -717,6 +719,7 @@ public class Badges {
 		firstBossClassBadges.put(HeroClass.MAGE, Badge.BOSS_SLAIN_1_MAGE);
 		firstBossClassBadges.put(HeroClass.ROGUE, Badge.BOSS_SLAIN_1_ROGUE);
 		firstBossClassBadges.put(HeroClass.HUNTRESS, Badge.BOSS_SLAIN_1_HUNTRESS);
+		firstBossClassBadges.put(HeroClass.DUELIST, Badge.BOSS_SLAIN_1_DUELIST);
 	}
 
 	private static LinkedHashMap<HeroClass, Badge> victoryClassBadges = new LinkedHashMap<>();
@@ -725,6 +728,7 @@ public class Badges {
 		victoryClassBadges.put(HeroClass.MAGE, Badge.VICTORY_MAGE);
 		victoryClassBadges.put(HeroClass.ROGUE, Badge.VICTORY_ROGUE);
 		victoryClassBadges.put(HeroClass.HUNTRESS, Badge.VICTORY_HUNTRESS);
+		victoryClassBadges.put(HeroClass.DUELIST, Badge.VICTORY_DUELIST);
 	}
 
 	private static LinkedHashMap<HeroSubClass, Badge> thirdBossSubclassBadges = new LinkedHashMap<>();
@@ -834,21 +838,21 @@ public class Badges {
 		
 		Badge badge = null;
 		switch (Dungeon.hero.heroClass) {
-		case WARRIOR:
-			badge = Badge.MASTERY_WARRIOR;
-			break;
-		case MAGE:
-			badge = Badge.MASTERY_MAGE;
-			break;
-		case ROGUE:
-			badge = Badge.MASTERY_ROGUE;
-			break;
-		case HUNTRESS:
-			badge = Badge.MASTERY_HUNTRESS;
-			break;
-		case ALCHEMIST:
-			badge = Badge.MASTERY_ALCHEMIST;
-			break;
+			case WARRIOR:
+				badge = Badge.MASTERY_WARRIOR;
+				break;
+			case MAGE:
+				badge = Badge.MASTERY_MAGE;
+				break;
+			case ROGUE:
+				badge = Badge.MASTERY_ROGUE;
+				break;
+			case HUNTRESS:
+				badge = Badge.MASTERY_HUNTRESS;
+				break;
+			case DUELIST:
+				badge = Badge.MASTERY_DUELIST;
+				break;
 		}
 		
 		unlock(badge);
@@ -876,24 +880,12 @@ public class Badges {
 		}
 	}
 
-	public static void validateAlchemistUnlock(Item item){
-		if(!(item instanceof AlchemyPage)) return;
-		if(item == null && !isUnlocked(Badge.UNLOCK_ALCHEMIST)){
-			displayBadge( Badge.UNLOCK_ALCHEMIST );
+	public static void validateDuelistUnlock(){
+		if (Dungeon.hero.belongings.weapon instanceof MeleeWeapon
+				&& ((MeleeWeapon) Dungeon.hero.belongings.weapon).tier >= 2
+				&& ((MeleeWeapon) Dungeon.hero.belongings.weapon).STRReq() <= Dungeon.hero.STR()){
+			displayBadge( Badge.UNLOCK_DUELIST );
 		}
-		Collection<String> allPages = Document.ALCHEMY_GUIDE.pageNames();
-		ArrayList<String> missingPages = new ArrayList<>();
-		for ( String page : allPages){
-			if (!Document.ALCHEMY_GUIDE.isPageFound(page)){
-				missingPages.add(page);
-			}
-		}
-		if (missingPages.size() <= 0 && !isUnlocked(Badge.UNLOCK_ALCHEMIST)){
-			displayBadge( Badge.UNLOCK_ALCHEMIST );
-		}
-//		if (isUnlocked(Badge.ITEMS_CRAFTED_3) && !isUnlocked(Badge.UNLOCK_ALCHEMIST)){
-//			displayBadge( Badge.UNLOCK_ALCHEMIST );
-//		}
 	}
 	
 	public static void validateMasteryCombo( int n ) {

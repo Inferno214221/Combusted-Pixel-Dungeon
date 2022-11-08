@@ -70,8 +70,8 @@ public class WndHeroInfo extends WndTabbed {
 			case HUNTRESS:
 				tabIcon = new ItemSprite(ItemSpriteSheet.SPIRIT_BOW, null);
 				break;
-			case ALCHEMIST:
-				tabIcon = new ItemSprite(ItemSpriteSheet.ARTIFACT_TOOLKIT, null);
+			case DUELIST:
+				tabIcon = new ItemSprite(ItemSpriteSheet.RAPIER, null);
 				break;
 		}
 
@@ -192,9 +192,9 @@ public class WndHeroInfo extends WndTabbed {
 							new ItemSprite(ItemSpriteSheet.GLOVES),
 							new ItemSprite(ItemSpriteSheet.SCROLL_ISAZ)};
 					break;
-				case ALCHEMIST:
-					icons = new Image[]{ new ItemSprite(ItemSpriteSheet.ARTIFACT_TOOLKIT),
-							new ItemSprite(ItemSpriteSheet.POTION_CRIMSON),
+				case DUELIST:
+					icons = new Image[]{ new ItemSprite(ItemSpriteSheet.RAPIER),
+							new ItemSprite(ItemSpriteSheet.RAPIER),
 							new ItemSprite(ItemSpriteSheet.SCROLL_ISAZ)};
 					break;
 			}
