@@ -105,6 +105,20 @@ public class AboutScene extends PixelScene {
 		}
 		content.add(rpx);
 
+		CreditsBlock rpxc = new CreditsBlock(true, Window.TITLE_COLOR,
+				null, null,
+				"_Used content:_\n" +
+				"Alchemist class idea and sprites.\n" +
+				"Alchemist unlock badge.\n" +
+				"Alternative floor graphics.",
+				null, null);
+		if (landscape()){
+			rpxc.setRect((w - fullWidth)/2f - 6, rpx.bottom()+4, 120, 0);
+		} else {
+			rpxc.setRect((w - fullWidth)/2f, rpx.bottom()+4, 120, 0);
+		}
+		content.add(rpxc);
+
 		CreditsBlock supx = new CreditsBlock(true, Window.TITLE_COLOR,
 				"Summoning Pixel Dungeon",
 				Icons.SUPX.get(),
@@ -113,12 +127,26 @@ public class AboutScene extends PixelScene {
 				"https://reddit.com/u/TrashboxBobylev");
 		if (landscape()){
 			supx.setRect(rpx.right(), rpx.top(), 120, 0);
-			content.add(supx);
-			addLine(supx.bottom() + 13, content);
 		} else {
-			supx.setRect((w - fullWidth)/2f, rpx.bottom()+8, 120, 0);
-			content.add(supx);
-			addLine(supx.bottom() + 4, content);
+			supx.setRect((w - fullWidth)/2f, rpxc.bottom()+8, 120, 0);
+		}
+		content.add(supx);
+
+		CreditsBlock supxc = new CreditsBlock(true, Window.TITLE_COLOR,
+				null, null,
+				"_Used content:_\n" +
+						"Angled action button.\n" +
+						"Enchantment Transfer spell.\n" +
+						"Stone of Affection.",
+				null, null);
+		if (landscape()){
+			supxc.setRect(rpx.right(), supx.bottom()+4, 120, 0);
+			content.add(supxc);
+			addLine(rpxc.bottom() + 4, content);
+		} else {
+			supxc.setRect((w - fullWidth)/2f, supx.bottom()+4, 120, 0);
+			content.add(supxc);
+			addLine(supxc.bottom() + 4, content);
 		}
 
 		//*** Shattered Pixel Dungeon Credits ***
@@ -136,9 +164,9 @@ public class AboutScene extends PixelScene {
 				"ShatteredPixel.com",
 				shpxLink);
 		if (landscape()){
-			shpx.setRect((w - fullWidth)/2f - 6, rpx.bottom()+16, 120, 0);
+			shpx.setRect((w - fullWidth)/2f - 6, rpxc.bottom()+12, 120, 0);
 		} else {
-			shpx.setRect((w - fullWidth)/2f, supx.bottom()+8, 120, 0);
+			shpx.setRect((w - fullWidth)/2f, supxc.bottom()+8, 120, 0);
 		}
 		content.add(shpx);
 
