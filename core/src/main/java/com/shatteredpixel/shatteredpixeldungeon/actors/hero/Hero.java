@@ -115,6 +115,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.thrown.ThrownWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Document;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
@@ -427,6 +428,25 @@ public class Hero extends Char {
 	}
 	
 	public boolean shoot( Char enemy, MissileWeapon wep ) {
+
+		this.enemy = enemy;
+		boolean wasEnemy = enemy.alignment == Alignment.ENEMY;
+
+		//temporarily set the hero's weapon to the missile weapon being used
+		//TODO improve this!
+		belongings.thrownWeapon = wep;
+		boolean hit = attack( enemy );
+		Invisibility.dispel();
+		belongings.thrownWeapon = null;
+
+		if (hit && subClass == HeroSubClass.GLADIATOR && wasEnemy){
+			Buff.affect( this, Combo.class ).hit( enemy );
+		}
+
+		return hit;
+	}
+
+	public boolean shoot( Char enemy, ThrownWeapon wep ) {
 
 		this.enemy = enemy;
 		boolean wasEnemy = enemy.alignment == Alignment.ENEMY;
