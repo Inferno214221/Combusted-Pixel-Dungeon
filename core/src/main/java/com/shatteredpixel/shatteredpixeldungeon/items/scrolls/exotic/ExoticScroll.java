@@ -51,6 +51,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfIntuition;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfShock;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.exotic.StoneOfAffection;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.exotic.StoneOfKnowledge;
+import com.shatteredpixel.shatteredpixeldungeon.items.stones.exotic.StoneOfMagicDetection;
+import com.shatteredpixel.shatteredpixeldungeon.items.stones.exotic.StoneOfPath;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.exotic.StoneOfTrapFinding;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.utils.Reflection;
@@ -177,8 +179,8 @@ public abstract class ExoticScroll extends Scroll {
 //			stones.put(ScrollOfRetribution.class,   StoneOfBlast.class);
 //			stones.put(ScrollOfRage.class,          StoneOfAggression.class);
 //			stones.put(ScrollOfRecharging.class,    StoneOfShock.class);
-//			stones.put(ScrollOfRemoveCurse.class,   StoneOfDisarming.class);
-//			stones.put(ScrollOfTeleportation.class, StoneOfBlink.class);
+			stones.put(ScrollOfAntiMagic.class,		StoneOfMagicDetection.class);
+			stones.put(ScrollOfPassage.class, 		StoneOfPath.class);
 //			stones.put(ScrollOfTerror.class,        StoneOfFear.class);
 //			stones.put(ScrollOfTransmutation.class, StoneOfAugmentation.class);
 //			stones.put(ScrollOfUpgrade.class,       StoneOfEnchantment.class);
@@ -209,7 +211,7 @@ public abstract class ExoticScroll extends Scroll {
 			s.quantity(s.quantity() - 1);
 			s.identify();
 
-			return Reflection.newInstance(stones.get(s.getClass())).quantity(2);
+			return Reflection.newInstance(stones.get(s.getClass())).quantity(getQuantity(s));
 		}
 
 		@Override
@@ -219,10 +221,17 @@ public abstract class ExoticScroll extends Scroll {
 			Scroll s = (Scroll) ingredients.get(0);
 
 			if (!s.isKnown()){
-				return new Runestone.PlaceHolder().quantity(2);
+				return new Runestone.PlaceHolder().quantity(1);
 			} else {
-				return Reflection.newInstance(stones.get(s.getClass())).quantity(2);
+				return Reflection.newInstance(stones.get(s.getClass())).quantity(getQuantity(s));
 			}
+		}
+
+		public int getQuantity(Scroll s) {
+//			if (s instanceof ScrollOfPassage) {
+//				return 3;
+//			}
+			return 3;
 		}
 	}
 }

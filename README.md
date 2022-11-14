@@ -4,7 +4,7 @@ Combusted Pixel Dungeon is a Roguelike RPG, with randomly generated levels, item
 
 Ideas, Assets, and code have been implemented from:
 - [Summoning Pixel Dungeon](https://github.com/TrashboxBobylev/Summoning-Pixel-Dungeon).
-- [Re-Remixed Dungeon](https://github.com/QuasiStellar/Re-Remixed_Dungeon).
+- [Remixed Dungeon](https://github.com/NYRDS/remixed-dungeon).
 
 Combusted Pixel Dungeon implements the following features to Shattered Pixel Dungeon:
 - New Spells
@@ -14,7 +14,7 @@ Unfinished features (WIP):
 - Exotic Stones
 - New Class:
   - Alchemist
-- Alternate Map Graphics for the Prison, Caves and City. (Using Graphic Assets from Re-Remixed Dungeon)
+- Alternate Map Graphics for the Prison, Caves and City. (Using Graphic Assets from Remixed Dungeon)
 
 Potential future changes might implement:
 - More Weapons
