@@ -12,7 +12,7 @@ allprojects {
 
     ext {
         appName = 'Combusted Pixel Dungeon'
-        appPackageName = 'com.inferno.combustedpixeldungeon'
+        appPackageName = 'com.inferno.combustedpixeldungeon2'
 
         appVersionCode = 671
         appVersionName = '0.25.0'
