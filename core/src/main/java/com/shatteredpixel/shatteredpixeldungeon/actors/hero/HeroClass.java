@@ -232,8 +232,6 @@ public enum HeroClass {
 		(hero.belongings.weapon = new Rapier()).identify();
 		hero.belongings.weapon.activate(hero);
 
-		Buff.affect(hero, MeleeWeapon.Charger.class).charge = 100f;
-
 		ThrowingKnife knives = new ThrowingKnife();
 		knives.quantity(3).collect();
 
