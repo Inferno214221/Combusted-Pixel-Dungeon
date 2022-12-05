@@ -157,6 +157,8 @@ public class Imp extends NPC {
 		
 		public static void reset() {
 			spawned = false;
+			given = false;
+			completed = false;
 
 			reward = null;
 		}
