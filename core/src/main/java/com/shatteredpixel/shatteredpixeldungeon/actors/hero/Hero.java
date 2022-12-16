@@ -118,6 +118,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RoundShield;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sai;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
@@ -586,6 +587,17 @@ public class Hero extends Char {
 
 		if (wep != null) {
 			dmg = wep.damageRoll( this );
+
+			if (heroClass != HeroClass.DUELIST
+					&& hasTalent(Talent.LIGHTWEIGHT_CHARGE)
+					&& wep instanceof MeleeWeapon) {
+				if (((MeleeWeapon) wep).tier == 2) {
+					dmg = Math.round(dmg * (1f + 0.1f*pointsInTalent(Talent.LIGHTWEIGHT_CHARGE)));
+				} else if (((MeleeWeapon) wep).tier == 3) {
+					dmg = Math.round(dmg * (1f + 0.05f*pointsInTalent(Talent.LIGHTWEIGHT_CHARGE)));
+				}
+			}
+
 			if (!(wep instanceof MissileWeapon)) dmg += RingOfForce.armedDamageBonus(this);
 		} else {
 			dmg = RingOfForce.damageRoll(this);
@@ -1245,13 +1257,6 @@ public class Hero extends Char {
 		KindOfWeapon wep = belongings.weapon();
 
 		if (wep != null) damage = wep.proc( this, enemy, damage );
-
-		if (buff(Talent.SpiritBladesTracker.class) != null
-				&& Random.Int(10) < 3*pointsInTalent(Talent.SPIRIT_BLADES)){
-			SpiritBow bow = belongings.getItem(SpiritBow.class);
-			if (bow != null) damage = bow.proc( this, enemy, damage );
-			buff(Talent.SpiritBladesTracker.class).detach();
-		}
 
 		damage = Talent.onAttackProc( this, enemy, damage );
 		
