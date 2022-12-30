@@ -1,20 +1,18 @@
 # Combusted Pixel Dungeon
 
-Combusted Pixel Dungeon is a Roguelike RPG, with randomly generated levels, items, enemies, and traps! Based on the [source code of Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), by [00-Evan](https://www.patreon.com/ShatteredPixel) which is based on the [source code of Pixel Dungeon](https://github.com/00-Evan/pixel-dungeon-gradle), by [Watabou](https://www.watabou.ru).
+[Shattered Pixel Dungeon](https://shatteredpixel.com/shatteredpd/) is an open-source traditional roguelike dungeon crawler with randomized levels and enemies, and hundreds of items to collect and use. Its based on the [source code of Pixel Dungeon](https://github.com/00-Evan/pixel-dungeon-gradle), by [Watabou](https://www.watabou.ru).
 
-Ideas, Assets, and code have been implemented from:
-- [Summoning Pixel Dungeon](https://github.com/TrashboxBobylev/Summoning-Pixel-Dungeon).
-- [Remixed Dungeon](https://github.com/NYRDS/remixed-dungeon).
+Shattered Pixel Dungeon currently compiles for Android, iOS, and Desktop platforms. You can find official releases of the game on:
+![Get it on Google Play](https://shatteredpixel.com/assets/images/gplay-badge.png)
+![Download on the App Store](https://shatteredpixel.com/assets/images/appstore-badge.png)
+![Steam](https://shatteredpixel.com/assets/images/steam-badge.png)
+![Github Releases](https://shatteredpixel.com/assets/images/github-badge.png)
 
 Combusted Pixel Dungeon implements the following features to Shattered Pixel Dungeon:
 - New Spells
 - Minor UI & Graphics Improvements
 
-Unfinished features (WIP):
-- Exotic Stones
-- New Class:
-  - Alchemist
-- Alternate Map Graphics for the Prison, Caves and City. (Using Graphic Assets from Remixed Dungeon)
+There is an official blog for this project at [ShatteredPixel.com](https://www.shatteredpixel.com/blog/).
 
 Potential future changes might implement:
 - More Weapons
@@ -46,4 +44,4 @@ If you'd like to work with the code, you can find the following guides in `/docs
     - **[If you plan to distribute on Google Play please read the end of this guide.](docs/getting-started-android.md#distributing-your-apk)**
 - [Compiling for desktop platforms.](docs/getting-started-desktop.md)
 - [Compiling for iOS.](docs/getting-started-ios.md)
-- [Recommended changes for making your own mod.](docs/recommended-changes.md)
+- [Recommended changes for making your own version.](docs/recommended-changes.md)
