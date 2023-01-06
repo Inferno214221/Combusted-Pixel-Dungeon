@@ -77,12 +77,16 @@ public class SacrificialFire extends Blob {
 						Buff.prolong( ch, Marked.class, Marked.DURATION );
 					}
 
-					if (off[cell] > 0
-							&& Dungeon.level.heroFOV[cell]
-							&& Dungeon.level.mobCount() == 0
-							&& bonusSpawns > 0){
-						if (Dungeon.level.spawnMob(4)) {
-							bonusSpawns--;
+						if (off[cell] > 0 && Dungeon.level.visited[cell]) {
+
+							Notes.add( Notes.Landmark.SACRIFICIAL_FIRE);
+
+							if (Dungeon.level.mobCount() == 0
+									&& bonusSpawns > 0) {
+								if (Dungeon.level.spawnMob(4)) {
+									bonusSpawns--;
+								}
+							}
 						}
 					}
 				}
