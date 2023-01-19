@@ -2070,7 +2070,7 @@ public class Hero extends Char {
 
 	@Override
 	public boolean isInvulnerable(Class effect) {
-		return buff(AnkhInvulnerability.class) != null;
+		return super.isInvulnerable(effect) || buff(AnkhInvulnerability.class) != null;
 	}
 
 	public boolean search( boolean intentional ) {
