@@ -1563,6 +1563,7 @@ public class Hero extends Char {
 				} else {
 					Chasm.heroFall(target);
 				}
+				canSelfTrample = false;
 				return false;
 			}
 
