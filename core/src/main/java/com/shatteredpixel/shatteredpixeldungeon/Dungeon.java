@@ -319,6 +319,9 @@ public class Dungeon {
 		if (branch == 0) {
 			switch (depth) {
 				case 1:
+//					firstAlterlocation = (seed % 2 == 1);
+//					secondAlterlocation = (seed % 4 >= 2);
+//					thirdAlterlocation = (seed % 8 >= 4);
 				case 2:
 				case 3:
 				case 4:
