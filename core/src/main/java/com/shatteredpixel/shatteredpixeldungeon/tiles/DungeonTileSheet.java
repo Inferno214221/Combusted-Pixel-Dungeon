@@ -80,7 +80,7 @@ public class DungeonTileSheet {
 	public static HashSet<Integer> waterStitcheable = new HashSet<>(Arrays.asList(
 			Terrain.EMPTY, Terrain.GRASS, Terrain.EMPTY_WELL,
 			Terrain.ENTRANCE, Terrain.EXIT, Terrain.EMBERS,
-			Terrain.BARRICADE, Terrain.HIGH_GRASS, Terrain.FURROWED_GRASS, Terrain.SECRET_TRAP,
+			Terrain.BARRICADE, Terrain.BOMBABLE, Terrain.HIGH_GRASS, Terrain.FURROWED_GRASS, Terrain.SECRET_TRAP,
 			Terrain.TRAP, Terrain.INACTIVE_TRAP, Terrain.EMPTY_DECO,
 			Terrain.SIGN, Terrain.WELL, Terrain.STATUE, Terrain.ALCHEMY,
 			Terrain.DOOR, Terrain.OPEN_DOOR, Terrain.LOCKED_DOOR, Terrain.CRYSTAL_DOOR
@@ -133,6 +133,7 @@ public class DungeonTileSheet {
 		chasmStitcheable.put( Terrain.TRAP,         CHASM_FLOOR );
 		chasmStitcheable.put( Terrain.BOOKSHELF,    CHASM_FLOOR );
 		chasmStitcheable.put( Terrain.BARRICADE,    CHASM_FLOOR );
+		chasmStitcheable.put( Terrain.BOMBABLE,    CHASM_FLOOR );
 		chasmStitcheable.put( Terrain.PEDESTAL,     CHASM_FLOOR );
 
 		//special floor
@@ -278,6 +279,7 @@ public class DungeonTileSheet {
 
 	public static final int RAISED_HIGH_GRASS_ALT   = RAISED_OTHER+9;
 	public static final int RAISED_FURROWED_ALT     = RAISED_OTHER+10;
+	public static final int RAISED_BOMBABLE         = RAISED_OTHER+13;
 
 
 
@@ -343,6 +345,7 @@ public class DungeonTileSheet {
 
 	public static final int HIGH_GRASS_OVERHANG_ALT     = WALL_OVERHANG+38;
 	public static final int FURROWED_OVERHANG_ALT       = WALL_OVERHANG+39;
+	public static final int BOMBABLE_OVERHANG           = WALL_OVERHANG+40;
 
 	//exit visuals are rendered flat atm, so they actually underhand
 	public static final int EXIT_UNDERHANG              = WALL_OVERHANG+41;

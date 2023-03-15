@@ -277,6 +277,9 @@ public abstract class RegularPainter extends Painter {
 					case BARRICADE:
 						l.map[door] = Terrain.BARRICADE;
 						break;
+					case BOMBABLE:
+						l.map[door] = Terrain.BOMBABLE;
+						break;
 					case LOCKED:
 						l.map[door] = Terrain.LOCKED_DOOR;
 						break;

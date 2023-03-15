@@ -154,7 +154,7 @@ public class Bomb extends Item {
 						CellEmitter.get(c).burst(SmokeParticle.FACTORY, 4);
 					}
 					
-					if (Dungeon.level.flamable[c]) {
+					if (Dungeon.level.flamable[c] || Dungeon.level.explosive[c]) {
 						Dungeon.level.destroy(c);
 						GameScene.updateMap(c);
 						terrainAffected = true;

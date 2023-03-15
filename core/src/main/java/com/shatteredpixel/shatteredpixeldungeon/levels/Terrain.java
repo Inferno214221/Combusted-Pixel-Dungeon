@@ -38,6 +38,7 @@ public class Terrain {
 	public static final int PEDESTAL		= 11;
 	public static final int WALL_DECO		= 12;
 	public static final int BARRICADE		= 13;
+	public static final int BOMBABLE		= 32;
 	public static final int EMPTY_SP		= 14;
 	public static final int HIGH_GRASS		= 15;
 	public static final int FURROWED_GRASS	= 30;
@@ -67,8 +68,9 @@ public class Terrain {
 	public static final int AVOID			= 0x20;
 	public static final int LIQUID			= 0x40;
 	public static final int PIT				= 0x80;
+	public static final int EXPLOSIVE		= 0x100;
 	
-	public static final int[] flags = new int[256];
+	public static final int[] flags = new int[512];//
 	static {
 		flags[CHASM]		= AVOID	| PIT;
 		flags[EMPTY]		= PASSABLE;
@@ -86,6 +88,7 @@ public class Terrain {
 		flags[PEDESTAL]		= PASSABLE;
 		flags[WALL_DECO]	= flags[WALL];
 		flags[BARRICADE]	= FLAMABLE | SOLID | LOS_BLOCKING;
+		flags[BOMBABLE]		= EXPLOSIVE | SOLID | LOS_BLOCKING;
 		flags[EMPTY_SP]		= flags[EMPTY];
 		flags[HIGH_GRASS]	= PASSABLE | LOS_BLOCKING | FLAMABLE;
 		flags[FURROWED_GRASS]= flags[HIGH_GRASS];

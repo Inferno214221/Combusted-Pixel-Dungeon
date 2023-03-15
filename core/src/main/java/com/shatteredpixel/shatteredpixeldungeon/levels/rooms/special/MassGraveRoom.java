@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Bomb;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.CorpseDust;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
@@ -51,8 +52,13 @@ public class MassGraveRoom extends SpecialRoom {
 	public void paint(Level level){
 
 		Door entrance = entrance();
-		entrance.set(Door.Type.BARRICADE);
-		level.addItemToSpawn(new PotionOfLiquidFlame());
+		if (Random.Int( 2 ) == 0) {
+			entrance.set( Door.Type.BOMBABLE );
+			level.addItemToSpawn( new Bomb() );
+		} else {
+			entrance.set( Door.Type.BARRICADE );
+			level.addItemToSpawn( new PotionOfLiquidFlame() );
+		}
 
 		Painter.fill(level, this, Terrain.WALL);
 		Painter.fill(level, this, 1, Terrain.EMPTY_SP);

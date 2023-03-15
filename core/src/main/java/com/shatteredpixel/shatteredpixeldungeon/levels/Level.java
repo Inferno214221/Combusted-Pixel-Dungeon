@@ -133,6 +133,7 @@ public abstract class Level implements Bundlable {
 	public boolean[] passable;
 	public boolean[] losBlocking;
 	public boolean[] flamable;
+	public boolean[] explosive;
 	public boolean[] secret;
 	public boolean[] solid;
 	public boolean[] avoid;
@@ -295,6 +296,7 @@ public abstract class Level implements Bundlable {
 		passable	= new boolean[length];
 		losBlocking	= new boolean[length];
 		flamable	= new boolean[length];
+		explosive	= new boolean[length];
 		secret		= new boolean[length];
 		solid		= new boolean[length];
 		avoid		= new boolean[length];
@@ -749,6 +751,7 @@ public abstract class Level implements Bundlable {
 			passable[i]		= (flags & Terrain.PASSABLE) != 0;
 			losBlocking[i]	= (flags & Terrain.LOS_BLOCKING) != 0;
 			flamable[i]		= (flags & Terrain.FLAMABLE) != 0;
+			explosive[i]		= (flags & Terrain.EXPLOSIVE) != 0;
 			secret[i]		= (flags & Terrain.SECRET) != 0;
 			solid[i]		= (flags & Terrain.SOLID) != 0;
 			avoid[i]		= (flags & Terrain.AVOID) != 0;
@@ -798,7 +801,7 @@ public abstract class Level implements Bundlable {
 		//if raw tile type is flammable or empty
 		int terr = map[pos];
 		if (terr == Terrain.EMPTY || terr == Terrain.EMPTY_DECO
-				|| (Terrain.flags[map[pos]] & Terrain.FLAMABLE) != 0) {
+				|| (Terrain.flags[map[pos]] & Terrain.FLAMABLE) != 0 || (Terrain.flags[map[pos]] & Terrain.EXPLOSIVE) >= 0) {
 			set(pos, Terrain.EMBERS);
 		}
 		Blob web = blobs.get(Web.class);
@@ -843,6 +846,7 @@ public abstract class Level implements Bundlable {
 		level.passable[cell]		= (flags & Terrain.PASSABLE) != 0;
 		level.losBlocking[cell]	    = (flags & Terrain.LOS_BLOCKING) != 0;
 		level.flamable[cell]		= (flags & Terrain.FLAMABLE) != 0;
+		level.explosive[cell]		= (flags & Terrain.EXPLOSIVE) != 0;
 		level.secret[cell]		    = (flags & Terrain.SECRET) != 0;
 		level.solid[cell]			= (flags & Terrain.SOLID) != 0;
 		level.avoid[cell]			= (flags & Terrain.AVOID) != 0;

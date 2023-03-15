@@ -76,6 +76,8 @@ public class DungeonTerrainTilemap extends DungeonTilemap {
 				return DungeonTileSheet.RAISED_ALCHEMY_POT;
 			} else if (tile == Terrain.BARRICADE) {
 				return DungeonTileSheet.RAISED_BARRICADE;
+			} else if (tile == Terrain.BOMBABLE) {
+				return DungeonTileSheet.RAISED_BOMBABLE;
 			} else if (tile == Terrain.HIGH_GRASS) {
 				return DungeonTileSheet.getVisualWithAlts(
 						DungeonTileSheet.RAISED_HIGH_GRASS,

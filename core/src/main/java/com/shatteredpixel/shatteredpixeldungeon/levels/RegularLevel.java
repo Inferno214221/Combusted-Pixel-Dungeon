@@ -677,7 +677,7 @@ public abstract class RegularLevel extends Level {
 
 		//There are no barricades, locked doors, or hidden doors
 		for (int i = 0; i < length; i++){
-			if (map[i] == Terrain.BARRICADE || map[i] == Terrain.LOCKED_DOOR || map[i] == Terrain.SECRET_DOOR){
+			if (map[i] == Terrain.BARRICADE || map[i] == Terrain.BOMBABLE || map[i] == Terrain.LOCKED_DOOR || map[i] == Terrain.SECRET_DOOR){
 				return false;
 			}
 		}
