@@ -70,7 +70,7 @@ public class Terrain {
 	public static final int PIT				= 0x80;
 	public static final int EXPLOSIVE		= 0x100;
 	
-	public static final int[] flags = new int[512];//
+	public static final int[] flags = new int[512];
 	static {
 		flags[CHASM]		= AVOID	| PIT;
 		flags[EMPTY]		= PASSABLE;

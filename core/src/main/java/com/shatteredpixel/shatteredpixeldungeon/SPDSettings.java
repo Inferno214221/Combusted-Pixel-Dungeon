@@ -453,4 +453,5 @@ public class SPDSettings extends GameSettings {
 
 	public static boolean debugScroll() { return getBoolean( DEBUG_SCROLL, false); }
 
+
 }

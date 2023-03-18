@@ -320,7 +320,6 @@ public class Generator {
 			};
 			SCROLL.defaultProbs = new float[]{ 0, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
 			SCROLL.probs = SCROLL.defaultProbs.clone();
-
 			EXOTIC_SCROLL.classes = new Class<?>[]{
 					ScrollOfEnchantment.class, //3 drop every chapter, see Dungeon.souNeeded()
 					ScrollOfDivination.class,

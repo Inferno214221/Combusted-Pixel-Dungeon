@@ -627,23 +627,20 @@ public class CBDv0_1_Changes {
 				"_First major release!_\nThank you for playing Combusted Pixel Dungeon!"));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ENCHANT), "New Spells",
-				"_Seven spells have been added!_\n\n" +
+				"_Six spells have been added!_\n\n" +
 						"_Polymorph_, _Confusion_ and _Petrification_ from previous versions of Shattered Pixel Dungeon have been re-implemented as spells.\n\n" +
 						"_Enchantment Transfer_ from Summoning Pixel Dungeon has been added, allowing you to move an enchantment between items.\n\n" +
-						"_Duplicate_ and _Rewind_, two new spells designed by me, allowing you to duplicate small items and teleport to the start of the level on full health."));
-
-		changes.addButton( new ChangeButton(new Image(Assets.Sprites.ALCHEMIST, 0, 90, 12, 15), "New Hero",
-				"_The Alchemist has been added!_ (WIP)\n\n" +
-						"The _Alchemist_ starts with an alchemy kit and has abilities focused around crafting or using any alchemy related item.\n\n" +
-						"The _Alchemist's_ talents are currently unfinished."));
+						"_Rewind_is a new spell designed by me, allowing you to teleport to the start of the level on full health."));
 
 		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.STONE_KNOWLEDGE), "Exotic Stones",
 				"_Stones now have exotic variants similar to scrolls and potions!_ (WIP)\n\n" +
-						"_Exotix Stones_ are crafted in an alchemy pot or alchemy kit with a single exotic scroll and no energy.\n\n" +
+						"_Exotic Stones_ are crafted in an alchemy pot or alchemy kit with a single exotic scroll and no energy.\n\n" +
 						"Currently only three stones have been implemented so far: _Stone of Knowledge_, _Stone of Trap Finding_ and _Stone of Affection_.\n\n" +
 						"_Stone of Affection_ is from previous versions of Shattered Pixel Dungeon and can be crafted with an Exotic Scroll of Siren's Song.\n\n" +
 						"_Stone of Knowledge_ allows the user to identify a random item of the same type as one they target with it and can be crafted with an Exotic Scroll of Divination.\n\n" +
-						"_Stone of Trap Finding_ can be used to reveal any traps in a large radius and can be crafted with an Exotic Scroll of Foresight."));
+						"_Stone of Trap Finding_ can be used to reveal any traps in a large radius and can be crafted with an Exotic Scroll of Foresight.\n\n" +
+						"_Stone of Path_ _TODO_\n\n" + //TODO:
+						"_Stone of Magic Detection_ _TODO_")); //TODO:
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.PREFS), "Unlock All Characters",
 				"Added the option to _Unlock All Characters._\n\n" +
@@ -677,6 +674,10 @@ public class CBDv0_1_Changes {
 						"_Mage_ begins with a scroll holder.\n" +
 						"_Huntress_ still has a velvet pouch.\n\n" +
 						"_Alchemist_ has a potion bandolier."));
+
+		//Kits
+		//Bombable Walls
+		//Throwable Weapons
 
 	}
 

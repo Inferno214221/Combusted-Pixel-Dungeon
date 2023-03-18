@@ -765,7 +765,7 @@ public abstract class Level implements Bundlable {
 			passable[i]		= (flags & Terrain.PASSABLE) != 0;
 			losBlocking[i]	= (flags & Terrain.LOS_BLOCKING) != 0;
 			flamable[i]		= (flags & Terrain.FLAMABLE) != 0;
-			explosive[i]		= (flags & Terrain.EXPLOSIVE) != 0;
+			explosive[i]	= (flags & Terrain.EXPLOSIVE) != 0;
 			secret[i]		= (flags & Terrain.SECRET) != 0;
 			solid[i]		= (flags & Terrain.SOLID) != 0;
 			avoid[i]		= (flags & Terrain.AVOID) != 0;

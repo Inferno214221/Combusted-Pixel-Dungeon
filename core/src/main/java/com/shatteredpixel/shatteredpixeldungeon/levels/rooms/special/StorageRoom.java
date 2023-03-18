@@ -40,7 +40,7 @@ public class StorageRoom extends SpecialRoom {
 		Painter.fill( level, this, Terrain.WALL );
 		Painter.fill( level, this, 1, Terrain.EMPTY_SP );
 
-		boolean honeyPot = Random.Int( 2 ) == 0;
+		boolean honeyPot = Random.Int(2) == 0;
 		
 		int n = Random.IntRange( 3, 4 );
 		for (int i=0; i < n; i++) {
@@ -55,8 +55,8 @@ public class StorageRoom extends SpecialRoom {
 				level.drop( prize(level), pos);
 			}
 		}
-
-		if (Random.Int( 2 ) == 0) {
+		
+		if (Random.Int(2) == 0) {
 			entrance().set( Door.Type.BOMBABLE );
 			level.addItemToSpawn( new Bomb() );
 		} else {

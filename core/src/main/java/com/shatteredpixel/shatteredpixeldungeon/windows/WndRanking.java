@@ -234,7 +234,7 @@ public class WndRanking extends WndTabbed {
 			int buttontop = HEIGHT - 16;
 
 			if (Dungeon.seed != -1 && !Dungeon.daily &&
-					(DeviceCompat.isDebug() || Badges.isUnlocked(Badges.Badge.VICTORY))){
+					(DeviceCompat.isDebug() || Badges.isUnlocked(Badges.Badge.VICTORY) || SPDSettings.allUnlocked())){
 				final Image icon = Icons.get(Icons.SEED);
 				RedButton btnSeed = new RedButton(Messages.get(this, "copy_seed")){
 					@Override

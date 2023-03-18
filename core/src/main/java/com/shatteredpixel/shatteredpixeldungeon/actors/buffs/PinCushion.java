@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.darts.Dart;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.darts.TippedDart;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.thrown.ThrownWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
@@ -39,6 +40,14 @@ public class PinCushion extends Buff {
 	private ArrayList<Weapon> items = new ArrayList<>();
 
 	public void stick(MissileWeapon projectile){
+		this.stickA(projectile);
+	}
+
+	public void stick(ThrownWeapon projectile){
+		this.stickA(projectile);
+	}
+
+	private void stickA(Weapon projectile){
 		for (Item item : items){
 			if (item.isSimilar(projectile)){
 				item.merge(projectile);

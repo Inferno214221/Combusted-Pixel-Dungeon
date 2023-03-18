@@ -52,7 +52,7 @@ public class MassGraveRoom extends SpecialRoom {
 	public void paint(Level level){
 
 		Door entrance = entrance();
-		if (Random.Int( 2 ) == 0) {
+		if (Random.Int(2) == 0) {
 			entrance.set( Door.Type.BOMBABLE );
 			level.addItemToSpawn( new Bomb() );
 		} else {

@@ -440,6 +440,14 @@ public class Hero extends Char {
 	}
 	
 	public boolean shoot( Char enemy, MissileWeapon wep ) {
+		return this.shootA( enemy, wep );
+	}
+
+	public boolean shoot( Char enemy, ThrownWeapon wep ) {
+		return this.shootA( enemy, wep );
+	}
+
+	private boolean shootA( Char enemy, Weapon wep ) {
 
 		this.enemy = enemy;
 		boolean wasEnemy = enemy.alignment == Alignment.ENEMY

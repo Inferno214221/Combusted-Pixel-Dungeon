@@ -50,7 +50,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
-import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
@@ -134,6 +133,8 @@ public enum HeroClass {
 				break;
 		}
 
+		if (SPDSettings.debugScroll()) initDebug(hero);
+
 		if (SPDSettings.quickslotWaterskin()) {
 			for (int s = 0; s < QuickSlot.SIZE; s++) {
 				if (Dungeon.quickslot.getItem(s) == null) {
@@ -208,7 +209,7 @@ public enum HeroClass {
 		Dungeon.quickslot.setSlot(0, cloak);
 		Dungeon.quickslot.setSlot(1, knives);
 
-		new VelvetPouch().collect();
+		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 
 		new ScrollOfMagicMapping().identify();
@@ -240,8 +241,17 @@ public enum HeroClass {
 		Dungeon.quickslot.setSlot(0, hero.belongings.weapon);
 		Dungeon.quickslot.setSlot(1, spikes);
 
+		new MagicalHolster().collect();
+		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
+
 		new PotionOfStrength().identify();
 		new ScrollOfMirrorImage().identify();
+	}
+
+	private static void initDebug( Hero hero ) {
+		ScrollOfDebug debug = new ScrollOfDebug();
+		Dungeon.hero.belongings.backpack.items.add(debug);
+		Dungeon.quickslot.setSlot(Dungeon.quickslot.SIZE - 1, debug);
 	}
 
 	public String title() {
@@ -307,7 +317,7 @@ public enum HeroClass {
 	
 	public boolean isUnlocked(){
 		//always unlock on debug builds
-		if (DeviceCompat.isDebug()) return true;
+		if (DeviceCompat.isDebug() || SPDSettings.allUnlocked()) return true;
 
 		switch (this){
 			case WARRIOR: default:

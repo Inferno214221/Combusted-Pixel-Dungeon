@@ -30,11 +30,6 @@ public class Rewind extends Spell{
 
     @Override
     protected void onCast(Hero hero) {
-        TimekeepersHourglass.timeFreeze timeFreeze = Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
-        if (timeFreeze != null) timeFreeze.disarmPressedTraps();
-        Swiftthistle.TimeBubble timeBubble = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
-        if (timeBubble != null) timeBubble.disarmPressedTraps();
-
         InterlevelScene.mode = InterlevelScene.Mode.RETURN;//RETURN/DESCEND
         InterlevelScene.returnDepth = Dungeon.depth;
         InterlevelScene.returnPos = -1;

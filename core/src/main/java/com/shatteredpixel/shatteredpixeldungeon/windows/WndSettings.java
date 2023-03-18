@@ -268,7 +268,7 @@ public class WndSettings extends WndTabbed {
 			chkUnlocked.checked(SPDSettings.allUnlocked());
 			add(chkUnlocked);
 
-			if (DeviceCompat.isDebug() && DeviceCompat.isDesktop()) {
+			if (DeviceCompat.isDebug()) {
 				chkDebugScroll = new CheckBox("Give Debug Scroll") {
 					@Override
 					protected void onClick() {
@@ -279,38 +279,6 @@ public class WndSettings extends WndTabbed {
 				chkDebugScroll.checked(SPDSettings.debugScroll());
 				add(chkDebugScroll);
 			}
-
-//			chkDebugScroll = new CheckBox( "Give Debug Scroll" ) {
-//				@Override
-//				protected void onClick() {
-//					super.onClick();
-//					SPDSettings.debugScroll(checked());
-//				}
-//			};
-//			if (!(DeviceCompat.isDebug() && DeviceCompat.isDesktop())){
-//				chkDebugScroll.enable(false);
-//			}
-//			chkDebugScroll.checked(SPDSettings.debugScroll());
-//			add(chkDebugScroll);
-
-			/*if ((int)Math.ceil(2* Game.density) < PixelScene.maxDefaultZoom) {
-				optScale = new OptionSlider(Messages.get(this, "scale"),
-						(int)Math.ceil(2* Game.density)+ "X",
-						PixelScene.maxDefaultZoom + "X",
-						(int)Math.ceil(2* Game.density),
-						PixelScene.maxDefaultZoom ) {
-					@Override
-					protected void onChange() {
-						if (getSelectedValue() != SPDSettings.scale()) {
-							SPDSettings.scale(getSelectedValue());
-							ShatteredPixelDungeon.seamlessResetScene();
-						}
-					}
-				};
-				optScale.setSelectedValue(PixelScene.defaultZoom);
-				add(optScale);
-			}*/
-			// Moved to interface tab in shattered 1.13
 
 			if (DeviceCompat.isAndroid() && PixelScene.maxScreenZoom >= 2) {
 				chkSaver = new CheckBox(Messages.get(this, "saver")) {
@@ -410,7 +378,7 @@ public class WndSettings extends WndTabbed {
 				bottom = chkFullscreen.bottom();
 				chkUnlocked.setRect(0, bottom + GAP, width/2-1, BTN_HEIGHT);
 				bottom = chkUnlocked.bottom();
-				if (DeviceCompat.isDebug() && DeviceCompat.isDesktop()) {
+				if (DeviceCompat.isDebug()) {
 					chkDebugScroll.setRect(0, bottom + GAP, width / 2 - 1, BTN_HEIGHT);
 					bottom = chkDebugScroll.bottom();
 				}
@@ -424,7 +392,7 @@ public class WndSettings extends WndTabbed {
 				}
 				chkUnlocked.setRect(0, bottom + GAP, width, BTN_HEIGHT);
 				bottom = chkUnlocked.bottom();
-				if (DeviceCompat.isDebug() && DeviceCompat.isDesktop()) {
+				if (DeviceCompat.isDebug()) {
 					chkDebugScroll.setRect(0, bottom + GAP, width, BTN_HEIGHT);
 					bottom = chkDebugScroll.bottom();
 				}

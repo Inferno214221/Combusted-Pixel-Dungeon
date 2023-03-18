@@ -269,12 +269,12 @@ public class Dungeon {
 		gold = 0;
 		energy = 0;
 
-//		firstAlterlocation = Random.Boolean();
-//		secondAlterlocation = Random.Boolean();
-//		thirdAlterlocation = Random.Boolean();
-		firstAlterlocation = (seed % 2 == 1);
-		secondAlterlocation = (seed % 4 >= 2);
-		thirdAlterlocation = (seed % 8 >= 4);
+		firstAlterlocation = Random.Int(2) == 0;
+		secondAlterlocation = Random.Int(2) == 0;
+		thirdAlterlocation = Random.Int(2) == 0;
+//		firstAlterlocation = (seed % 2 == 1);
+//		secondAlterlocation = (seed % 4 >= 2);
+//		thirdAlterlocation = (seed % 8 >= 4);
 
 		droppedItems = new SparseArray<>();
 		portedItems = new SparseArray<>();

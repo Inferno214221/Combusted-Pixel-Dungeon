@@ -216,7 +216,6 @@ public abstract class Recipe {
 		new TelekineticGrab.Recipe(),
 		new SummonElemental.Recipe(),
 		new StewedMeat.twoMeat(),
-		new DuplicateItem.Recipe(),
 		new Rewind.Recipe(),
 		new EnchantParchment.Recipe()
 	};

@@ -274,6 +274,7 @@ public class DungeonTileSheet {
 	public static final int RAISED_STATUE_SP        = RAISED_OTHER+2;
 	public static final int RAISED_ALCHEMY_POT      = RAISED_OTHER+3;
 	public static final int RAISED_BARRICADE        = RAISED_OTHER+4;
+	public static final int RAISED_BOMBABLE         = RAISED_OTHER+13;
 	public static final int RAISED_HIGH_GRASS       = RAISED_OTHER+5;
 	public static final int RAISED_FURROWED_GRASS   = RAISED_OTHER+6;
 
@@ -340,6 +341,7 @@ public class DungeonTileSheet {
 	public static final int STATUE_OVERHANG             = WALL_OVERHANG+32;
 	public static final int ALCHEMY_POT_OVERHANG        = WALL_OVERHANG+33;
 	public static final int BARRICADE_OVERHANG          = WALL_OVERHANG+34;
+	public static final int BOMBABLE_OVERHANG           = WALL_OVERHANG+40;
 	public static final int HIGH_GRASS_OVERHANG         = WALL_OVERHANG+35;
 	public static final int FURROWED_OVERHANG           = WALL_OVERHANG+36;
 

@@ -416,12 +416,12 @@ abstract public class ThrownWeapon extends Weapon {
         }
     }
 
-    @Override
-    public ArrayList<String> actions(Hero hero ) {
-        ArrayList<String> actions = super.actions( hero );
-        if( !actions.contains( AC_UNEQUIP ) ) actions.add( AC_EQUIP );
-        return actions;
-    }
+//    @Override
+//    public ArrayList<String> actions(Hero hero ) {
+//        ArrayList<String> actions = super.actions( hero );
+//        if( !actions.contains( AC_UNEQUIP ) ) actions.add( AC_EQUIP );
+//        return actions;
+//    }
 
     @Override
     public int min(int lvl) {

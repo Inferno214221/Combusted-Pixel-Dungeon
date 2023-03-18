@@ -61,7 +61,7 @@ public class DeviceCompat {
 	}
 	
 	public static boolean isDebug(){
-		return Game.version.contains("INDEV") && !isAndroid();
+		return Game.version.contains("INDEV") && isDesktop();
 	}
 	
 	public static void log( String tag, String message ){

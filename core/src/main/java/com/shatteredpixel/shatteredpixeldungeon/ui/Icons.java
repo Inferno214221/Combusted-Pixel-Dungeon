@@ -155,10 +155,10 @@ public enum Icons {
 				icon.frame( icon.texture.uvRectBySize( 119, 0, 16, 16 ) );
 				break;
 			case CBPX:
-				icon.frame( icon.texture.uvRectBySize( 152, 0, 18, 16 ) );
+				icon.frame( icon.texture.uvRectBySize( 136, 0, 18, 17 ) );
 				break;
 			case RPX:
-				icon.frame( icon.texture.uvRectBySize( 170, 0, 17, 13 ) );
+				icon.frame( icon.texture.uvRectBySize( 154, 0, 17, 13 ) );
 				break;
 
 			case STAIRS:
