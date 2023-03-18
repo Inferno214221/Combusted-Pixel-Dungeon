@@ -3,6 +3,8 @@ core/build/
 android/build/
 desktop/build/
 .idea
+*/build
+*/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
