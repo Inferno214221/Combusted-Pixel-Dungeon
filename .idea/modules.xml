@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Combusted-Pixel-Dungeon.iml" filepath="$PROJECT_DIR$/.idea/modules/Combusted-Pixel-Dungeon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Combusted-Pixel-Dungeon.iml" filepath="$PROJECT_DIR$/.idea/Combusted-Pixel-Dungeon.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SPD-classes/Combusted-Pixel-Dungeon.SPD-classes.iml" filepath="$PROJECT_DIR$/.idea/modules/SPD-classes/Combusted-Pixel-Dungeon.SPD-classes.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SPD-classes/Combusted-Pixel-Dungeon.SPD-classes.main.iml" filepath="$PROJECT_DIR$/.idea/modules/SPD-classes/Combusted-Pixel-Dungeon.SPD-classes.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SPD-classes/Combusted-Pixel-Dungeon.SPD-classes.test.iml" filepath="$PROJECT_DIR$/.idea/modules/SPD-classes/Combusted-Pixel-Dungeon.SPD-classes.test.iml" />

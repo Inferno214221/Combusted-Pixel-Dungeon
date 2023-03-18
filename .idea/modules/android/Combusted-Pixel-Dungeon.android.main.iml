@@ -39,7 +39,7 @@
     <content url="file://$MODULE_DIR$/../../../core/src/main/assets">
       <sourceFolder url="file://$MODULE_DIR$/../../../core/src/main/assets" type="java-resource" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 31 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 33, extension level 3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Combusted-Pixel-Dungeon.services.updates.debugUpdates.main" />
     <orderEntry type="module" module-name="Combusted-Pixel-Dungeon.services.main" />

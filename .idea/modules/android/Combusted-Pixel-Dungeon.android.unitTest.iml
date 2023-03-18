@@ -20,7 +20,7 @@
     <content url="file://$MODULE_DIR$/../../../android/build/generated/ap_generated_sources/debugUnitTest/out" />
     <content url="file://$MODULE_DIR$/../../../android/src/test" />
     <content url="file://$MODULE_DIR$/../../../android/src/testDebug" />
-    <orderEntry type="jdk" jdkName="Android API 31 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 33, extension level 3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Combusted-Pixel-Dungeon.services.updates.debugUpdates.main" scope="TEST" />
     <orderEntry type="module" module-name="Combusted-Pixel-Dungeon.services.main" scope="TEST" />
@@ -83,5 +83,4 @@
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="Gradle: com.badlogicgames.gdx-controllers:gdx-controllers-android:2.2.3-SNAPSHOT@aar" level="project" />
   </component>
-  <component name="TestModuleProperties" production-module="Combusted-Pixel-Dungeon.android.main" />
 </module>
