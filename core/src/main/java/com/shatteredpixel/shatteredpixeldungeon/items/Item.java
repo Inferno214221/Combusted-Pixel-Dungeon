@@ -245,6 +245,23 @@ public class Item implements Bundlable {
 							});
 						}
 					}
+					if (TippedDart.lostDarts > 0){
+						Dart d = new Dart();
+						d.quantity(TippedDart.lostDarts);
+						TippedDart.lostDarts = 0;
+						if (!d.collect()){
+							//have to handle this in an actor as we can't manipulate the heap during pickup
+							Actor.add(new Actor() {
+								{ actPriority = VFX_PRIO; }
+								@Override
+								protected boolean act() {
+									Dungeon.level.drop(d, Dungeon.hero.pos).sprite.drop();
+									Actor.remove(this);
+									return true;
+								}
+							});
+						}
+					}
 					return true;
 				}
 			}
