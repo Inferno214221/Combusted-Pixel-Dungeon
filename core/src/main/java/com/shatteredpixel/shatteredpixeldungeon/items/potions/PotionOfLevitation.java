@@ -31,7 +31,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ConfusionGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Levitation;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -55,13 +54,13 @@ public class PotionOfLevitation extends Potion {
 			Sample.INSTANCE.play( Assets.Sounds.GAS );
 		}
 
-		GameScene.add( Blob.seed( cell, 1000 + (100 * Dungeon.hero.pointsInTalent(Talent.POTION_DURATION)), ConfusionGas.class ) );
+		GameScene.add( Blob.seed( cell, 1000, ConfusionGas.class ) );
 	}
 	
 	@Override
 	public void apply( Hero hero ) {
 		identify();
-		Buff.affect( hero, Levitation.class, Levitation.DURATION + hero.pointsInTalent(Talent.POTION_DURATION));
+		Buff.affect( hero, Levitation.class, Levitation.DURATION );
 		GLog.i( Messages.get(this, "float") );
 	}
 	

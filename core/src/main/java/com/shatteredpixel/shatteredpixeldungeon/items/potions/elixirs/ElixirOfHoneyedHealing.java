@@ -42,7 +42,6 @@ public class ElixirOfHoneyedHealing extends Elixir {
 	
 	{
 		image = ItemSpriteSheet.ELIXIR_HONEY;
-		icon = ItemSpriteSheet.Icons.POTION_HEALING;
 	}
 	
 	@Override

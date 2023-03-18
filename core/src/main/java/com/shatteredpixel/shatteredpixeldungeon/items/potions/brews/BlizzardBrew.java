@@ -28,7 +28,6 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blizzard;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfFrost;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
@@ -40,7 +39,6 @@ public class BlizzardBrew extends Brew {
 	
 	{
 		image = ItemSpriteSheet.BREW_BLIZZARD;
-		icon = ItemSpriteSheet.Icons.POTION_FROST;
 	}
 	
 	@Override
@@ -54,7 +52,7 @@ public class BlizzardBrew extends Brew {
 		int centerVolume = 120;
 		for (int i : PathFinder.NEIGHBOURS8){
 			if (!Dungeon.level.solid[cell+i]){
-				GameScene.add( Blob.seed( cell+i, 120 + (12 * Dungeon.hero.pointsInTalent(Talent.POTION_DURATION)), Blizzard.class ) );
+				GameScene.add( Blob.seed( cell+i, 120, Blizzard.class ) );
 			} else {
 				centerVolume += 120;
 			}

@@ -34,7 +34,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.FlavourBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LostInventory;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Flare;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -74,7 +73,7 @@ public class PotionOfCleansing extends ExoticPotion {
 	}
 
 	public static void cleanse(Char ch){
-		cleanse(ch, Cleanse.DURATION + ((int) 0.5f * Dungeon.hero.pointsInTalent(Talent.POTION_DURATION)));
+		cleanse(ch, Cleanse.DURATION);
 	}
 
 	public static void cleanse(Char ch, float duration){

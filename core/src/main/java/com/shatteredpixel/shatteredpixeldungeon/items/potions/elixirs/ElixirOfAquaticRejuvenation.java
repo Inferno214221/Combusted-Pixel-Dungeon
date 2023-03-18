@@ -44,7 +44,6 @@ public class ElixirOfAquaticRejuvenation extends Elixir {
 	
 	{
 		image = ItemSpriteSheet.ELIXIR_AQUA;
-		icon = ItemSpriteSheet.Icons.POTION_HEALING;
 	}
 	
 	@Override
@@ -52,7 +51,7 @@ public class ElixirOfAquaticRejuvenation extends Elixir {
 		if (Dungeon.isChallenged(Challenges.NO_HEALING)){
 			PotionOfHealing.pharmacophobiaProc(hero);
 		} else {
-			Buff.affect(hero, AquaHealing.class).set(Math.round(hero.HT * 1.5f + (0.1f * Dungeon.hero.pointsInTalent(Talent.POTION_DURATION))));
+			Buff.affect(hero, AquaHealing.class).set(Math.round(hero.HT * 1.5f));
 		}
 		Talent.onHealingPotionUsed( hero );
 	}

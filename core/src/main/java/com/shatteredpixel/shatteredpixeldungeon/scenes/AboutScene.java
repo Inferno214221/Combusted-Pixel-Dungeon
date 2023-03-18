@@ -111,8 +111,6 @@ public class AboutScene extends PixelScene {
 		CreditsBlock rpxc = new CreditsBlock(true, Window.TITLE_COLOR,
 				null, null,
 				"_Used content:_\n" +
-				"Alchemist class idea and sprites.\n" +
-				"Alchemist unlock badge.\n" +
 				"Alternative floor graphics.",
 				null, null);
 		if (landscape()){

@@ -63,12 +63,11 @@ public class EnergyCrystal extends Item {
 
 		Dungeon.energy += quantity;
 		//TODO track energy collected maybe? We do already track recipes crafted though..
-		Dungeon.energy += hero.pointsInTalent(Talent.ALCHEMY_ENERGY);
 		//TODO Statistics.goldCollected += quantity;
 		//Badges.validateGoldCollected();
 
 		GameScene.pickUp( this, pos );
-		hero.sprite.showStatus( 0x44CCFF, TXT_VALUE, quantity + hero.pointsInTalent(Talent.ALCHEMY_ENERGY));
+		hero.sprite.showStatus( 0x44CCFF, TXT_VALUE, quantity);
 		hero.spendAndNext( TIME_TO_PICK_UP );
 
 		Sample.INSTANCE.play( Assets.Sounds.ITEM );

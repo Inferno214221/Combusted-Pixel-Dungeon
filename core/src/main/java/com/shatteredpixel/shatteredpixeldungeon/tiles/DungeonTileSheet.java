@@ -283,7 +283,6 @@ public class DungeonTileSheet {
 
 	public static final int RAISED_HIGH_GRASS_ALT   = RAISED_OTHER+9;
 	public static final int RAISED_FURROWED_ALT     = RAISED_OTHER+10;
-	public static final int RAISED_BOMBABLE         = RAISED_OTHER+13;
 
 
 
@@ -350,7 +349,6 @@ public class DungeonTileSheet {
 
 	public static final int HIGH_GRASS_OVERHANG_ALT     = WALL_OVERHANG+38;
 	public static final int FURROWED_OVERHANG_ALT       = WALL_OVERHANG+39;
-	public static final int BOMBABLE_OVERHANG           = WALL_OVERHANG+40;
 
 	//exit visuals are rendered flat atm, so they actually underhand
 	public static final int EXIT_UNDERHANG              = WALL_OVERHANG+41;

@@ -473,30 +473,6 @@ public class Hero extends Char {
 
 		return hit;
 	}
-
-	public boolean shoot( Char enemy, ThrownWeapon wep ) {
-
-		this.enemy = enemy;
-		boolean wasEnemy = enemy.alignment == Alignment.ENEMY
-				|| (enemy instanceof Mimic && enemy.alignment == Alignment.NEUTRAL);
-
-		//temporarily set the hero's weapon to the missile weapon being used
-		//TODO improve this!
-		belongings.thrownWeapon = wep;
-		boolean hit = attack( enemy );
-		Invisibility.dispel();
-		belongings.thrownWeapon = null;
-
-		if (hit && subClass == HeroSubClass.GLADIATOR && wasEnemy){
-			Buff.affect( this, Combo.class ).hit( enemy );
-		}
-
-		if (hit && heroClass == HeroClass.DUELIST && wasEnemy){
-			Buff.append( this, Sai.ComboStrikeTracker.class, Sai.ComboStrikeTracker.DURATION);
-		}
-
-		return hit;
-	}
 	
 	@Override
 	public int attackSkill( Char target ) {

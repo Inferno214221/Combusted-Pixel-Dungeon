@@ -446,8 +446,6 @@ public class AlchemyScene extends PixelScene {
 
 			Statistics.itemsCrafted++;
 			Badges.validateItemsCrafted();
-			//Badges.validateAlchemistUnlock();
-			Talent.onItemCrafted(Dungeon.hero, result);
 			
 			try {
 				Dungeon.saveAll();

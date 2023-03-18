@@ -51,22 +51,13 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.LeafParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
-import com.shatteredpixel.shatteredpixeldungeon.items.EnergyCrystal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HornOfPlenty;
-import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
-import com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.Brew;
-import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.Elixir;
-import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.ExoticPotion;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRecharging;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ExoticScroll;
-import com.shatteredpixel.shatteredpixeldungeon.items.stones.Runestone;
-import com.shatteredpixel.shatteredpixeldungeon.items.stones.exotic.StoneOfKnowledge;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
@@ -338,9 +329,7 @@ public enum Talent {
 	}
 
 	public String title(){
-		if (this == HEROIC_ENERGY
-				&& Dungeon.hero != null
-				&& Dungeon.hero.armorAbility instanceof Ratmogrify){
+		if (this == HEROIC_ENERGY && Ratmogrify.useRatroicEnergy){
 			return Messages.get(this, name() + ".rat_title");
 		}
 		return Messages.get(this, name() + ".title");
@@ -613,20 +602,6 @@ public enum Talent {
 		if (hero.pointsInTalent(THIEFS_INTUITION) == 2){
 			if (item instanceof Ring) ((Ring) item).setKnown();
 		}
-		if(!(item instanceof Artifact)){
-			return;
-		}
-		Artifact artifact = ((Artifact) item);
-		if ((hero.pointsInTalent(IDENTIFIED_ARTIFACTS) == 2) && !(((Artifact) item).isIdentified())){
-			if(artifact.getCharge() == artifact.getChargeCap()){
-				if(Random.Boolean()) artifact.upgrade();
-			}else{
-				artifact.charge(hero, (artifact.getChargeCap()*0.2f));
-			}
-		}
-		if (hero.hasTalent(IDENTIFIED_ARTIFACTS)){
-			((Artifact) item).identify();
-		}
 	}
 
 	//note that IDing can happen in alchemy scene, so be careful with VFX here
@@ -634,17 +609,15 @@ public enum Talent {
 		if (hero.hasTalent(TEST_SUBJECT)){
 			//heal for 2/3 HP
 			hero.HP = Math.min(hero.HP + 1 + hero.pointsInTalent(TEST_SUBJECT), hero.HT);
-			Emitter e = hero.sprite.emitter();
-			if (e != null) e.burst(Speck.factory(Speck.HEALING), hero.pointsInTalent(TEST_SUBJECT));
+			if (hero.sprite != null) {
+				Emitter e = hero.sprite.emitter();
+				if (e != null) e.burst(Speck.factory(Speck.HEALING), hero.pointsInTalent(TEST_SUBJECT));
+			}
 		}
 		if (hero.hasTalent(TESTED_HYPOTHESIS)){
 			//2/3 turns of wand recharging
 			Buff.affect(hero, Recharging.class, 1f + hero.pointsInTalent(TESTED_HYPOTHESIS));
 			ScrollOfRecharging.charge(hero);
-		}
-		if (hero.hasTalent(ALCHEMY_THEORIES) && (item instanceof Potion || item instanceof Scroll)){
-			Dungeon.energy++;
-			if (hero.pointsInTalent(Talent.ALCHEMY_THEORIES) >= 2) Buff.affect(Dungeon.hero, Barrier.class).setShield(2);
 		}
 	}
 
@@ -698,49 +671,6 @@ public enum Talent {
 		}
 
 		return dmg;
-	}
-
-	public static void onItemCrafted ( Hero hero, Item item) {
-		if (hero.hasTalent(Talent.BREWING_KNOWLEDGE) && item instanceof Potion){
-			switch (Random.IntRange(1, 8)){
-				case 1:
-					item.identify();
-					break;
-				case 2:
-					if (hero.pointsInTalent(Talent.BREWING_KNOWLEDGE) >= 2) item.identify();
-					break;
-				default:
-					break;
-			}
-		}
-		if (hero.hasTalent(Talent.EXOTIC_KNOWLEDGE) && (item instanceof ExoticScroll || item instanceof ExoticPotion)){
-			switch (Random.IntRange(1, 8)){
-				case 1:
-					item.identify();
-					break;
-				case 2:
-					if (hero.pointsInTalent(Talent.EXOTIC_KNOWLEDGE) >= 2) item.identify();
-					break;
-				default:
-					break;
-			}
-		}
-		if (hero.hasTalent(Talent.RUNE_CRAFTING) && item instanceof Runestone){
-			switch (Random.IntRange(1, 8)){
-				case 1:
-					hero.belongings.getSimilar(item).duplicate(item, 1);
-					break;
-				case 2:
-					if (hero.pointsInTalent(Talent.RUNE_CRAFTING) >= 2) hero.belongings.getSimilar(item).duplicate(item, 1);
-					break;
-				default:
-					break;
-			}
-		}
-	}
-	
-	public static void onUse (Hero hero, Item item) {
-		if (hero.hasTalent(Talent.SHIELDING_ELIXIRS) && (item instanceof Elixir || item instanceof Brew)) Buff.affect(Dungeon.hero, Barrier.class).setShield(2 * hero.pointsInTalent(Talent.SHIELDING_ELIXIRS));
 	}
 
 	public static class SuckerPunchTracker extends Buff{};

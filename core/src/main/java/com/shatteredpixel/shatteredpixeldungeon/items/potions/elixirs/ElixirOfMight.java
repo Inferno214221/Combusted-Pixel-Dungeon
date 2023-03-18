@@ -42,7 +42,6 @@ public class ElixirOfMight extends Elixir {
 
 	{
 		image = ItemSpriteSheet.ELIXIR_MIGHT;
-		icon = ItemSpriteSheet.Icons.POTION_STRENGTH;
 
 		unique = true;
 	}

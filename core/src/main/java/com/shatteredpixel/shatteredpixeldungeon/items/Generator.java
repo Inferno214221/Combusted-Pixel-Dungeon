@@ -586,9 +586,6 @@ public class Generator {
 				return randomMissile();
 			case ARTIFACT:
 				Item item = randomArtifact();
-				while (Dungeon.hero.heroClass == HeroClass.ALCHEMIST && item instanceof AlchemistsToolkit){
-					item = randomArtifact();
-				}
 				//if we're out of artifacts, return a ring instead.
 				return item != null ? item : random(Category.RING);
 			default:

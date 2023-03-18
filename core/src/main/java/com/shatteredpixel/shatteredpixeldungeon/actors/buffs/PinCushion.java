@@ -66,16 +66,6 @@ public class PinCushion extends Buff {
 		items.add(projectile);
 	}
 
-	public void stick(ThrownWeapon projectile){
-		for (Item item : items){
-			if (item.isSimilar(projectile)){
-				item.merge(projectile);
-				return;
-			}
-		}
-		items.add(projectile);
-	}
-
 	public Item grabOne(){
 		Item item = items.remove(0);
 		if (items.isEmpty()){
