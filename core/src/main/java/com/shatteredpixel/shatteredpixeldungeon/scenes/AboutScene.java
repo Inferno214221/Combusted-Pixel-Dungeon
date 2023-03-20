@@ -143,11 +143,39 @@ public class AboutScene extends PixelScene {
 		if (landscape()){
 			supxc.setRect(rpx.right(), supx.bottom()+4, 120, 0);
 			content.add(supxc);
-			addLine(rpxc.bottom() + 4, content);
+//			addLine(rpxc.bottom() + 4, content);
 		} else {
 			supxc.setRect((w - fullWidth)/2f, supx.bottom()+4, 120, 0);
 			content.add(supxc);
-			addLine(supxc.bottom() + 4, content);
+//			addLine(supxc.bottom() + 4, content);
+		}
+
+		CreditsBlock dvpx = new CreditsBlock(true, Window.TITLE_COLOR,
+				"Devoted Pixel Dungeon",
+				Icons.DVPX.get(),
+				"Developed by: _Arackulele_\nBased on ShatteredPD's open source",
+				"github: Arackulele",
+				"https://github.com/Arackulele");
+		if (landscape()){
+			dvpx.setRect(rpx.right()-60, supxc.bottom()+4, 120, 0);
+		} else {
+			dvpx.setRect((w - fullWidth)/2f, supxc.bottom()+8, 120, 0);
+		}
+		content.add(dvpx);
+
+		CreditsBlock dvpxc = new CreditsBlock(true, Window.TITLE_COLOR,
+				null, null,
+				"_Used content:_\n" +
+						"Item Sprites.",
+				null, null);
+		if (landscape()){
+			dvpxc.setRect(dvpx.left(), dvpx.bottom()+4, 120, 0);
+			content.add(dvpxc);
+			addLine(dvpxc.bottom() + 4, content);
+		} else {
+			dvpxc.setRect((w - fullWidth)/2f, dvpx.bottom()+4, 120, 0);
+			content.add(dvpxc);
+			addLine(dvpxc.bottom() + 4, content);
 		}
 
 		//*** Shattered Pixel Dungeon Credits ***
@@ -165,9 +193,9 @@ public class AboutScene extends PixelScene {
 				"ShatteredPixel.com",
 				shpxLink);
 		if (landscape()){
-			shpx.setRect((w - fullWidth)/2f - 6, rpxc.bottom()+12, 120, 0);
+			shpx.setRect((w - fullWidth)/2f - 6, dvpxc.bottom()+12, 120, 0);
 		} else {
-			shpx.setRect((w - fullWidth)/2f, supxc.bottom()+8, 120, 0);
+			shpx.setRect((w - fullWidth)/2f, dvpxc.bottom()+8, 120, 0);
 		}
 		content.add(shpx);
 

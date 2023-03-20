@@ -123,7 +123,8 @@ public enum Icons {
 	CUBE_CODE,
 	PURIGRO,
 	ARCNOR,
-	SUPX;
+	SUPX,
+	DVPX;
 
 	public Image get() {
 		return get( this );
@@ -389,7 +390,10 @@ public enum Icons {
 				icon.frame( icon.texture.uvRectBySize( 187, 96, 28, 19 ) );
 				icon.scale.set(PixelScene.align(0.49f));
 				break;
-
+			case DVPX:
+				icon.frame( icon.texture.uvRectBySize( 215, 96, 32, 32 ) );
+				icon.scale.set(PixelScene.align(0.49f));
+				break;
 		}
 		return icon;
 	}
