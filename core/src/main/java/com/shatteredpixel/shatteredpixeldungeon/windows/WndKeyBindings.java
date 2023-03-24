@@ -188,8 +188,30 @@ public class WndKeyBindings extends Window {
 				}
 			}
 		};
-		btnDefaults.setRect(0, height - BTN_HEIGHT *2 -1, WIDTH, BTN_HEIGHT);
+		btnDefaults.setRect(0, height - BTN_HEIGHT *3 -2, WIDTH, BTN_HEIGHT);
 		add(btnDefaults);
+
+		RedButton btnEmpty = new RedButton(Messages.get(this, "clear"), 9){
+			@Override
+			protected void onClick() {
+				changedBindings = SPDAction.getEmptyBindings();
+				for (BindingItem i : listItems){
+					int key1 = 0;
+					int key2 = 0;
+					int key3 = 0;
+					for( int k : changedBindings.keySet()){
+						if (changedBindings.get(k) == i.gameAction){
+							if (key1 == 0)          key1 = k;
+							else if (key2 == 0)     key2 = k;
+							else                    key3 = k;
+						}
+					}
+					i.updateBindings(key1, key2, key3);
+				}
+			}
+		};
+		btnEmpty.setRect(0, height - BTN_HEIGHT *2 -1, WIDTH, BTN_HEIGHT);
+		add(btnEmpty);
 
 		RedButton btnConfirm = new RedButton(Messages.get(this, "confirm"), 9){
 			@Override

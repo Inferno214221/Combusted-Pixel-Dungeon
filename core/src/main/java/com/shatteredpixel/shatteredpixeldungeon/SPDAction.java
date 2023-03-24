@@ -155,6 +155,58 @@ public class SPDAction extends GameAction {
 		return new LinkedHashMap<>(defaultBindings);
 	}
 
+	private static final LinkedHashMap<Integer, GameAction> emptyBindings = new LinkedHashMap<>();
+	static {
+		emptyBindings.put( Input.Keys.UNKNOWN,         SPDAction.BACK );
+
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.N );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.W );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.S );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.E );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.NW );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.NE );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.SW );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.SE );
+		emptyBindings.put( Input.Keys.UNKNOWN,       SPDAction.WAIT_OR_PICKUP );
+
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.INVENTORY );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.QUICKSLOT_1 );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.QUICKSLOT_2 );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.QUICKSLOT_3 );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.QUICKSLOT_4 );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.QUICKSLOT_5 );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.QUICKSLOT_6 );
+
+		emptyBindings.put( Input.Keys.UNKNOWN,             SPDAction.BAG_1 );
+		emptyBindings.put( Input.Keys.UNKNOWN,             SPDAction.BAG_2 );
+		emptyBindings.put( Input.Keys.UNKNOWN,             SPDAction.BAG_3 );
+		emptyBindings.put( Input.Keys.UNKNOWN,             SPDAction.BAG_4 );
+		emptyBindings.put( Input.Keys.UNKNOWN,             SPDAction.BAG_5 );
+
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.EXAMINE );
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.REST );
+
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.TAG_ATTACK );
+		emptyBindings.put( Input.Keys.UNKNOWN,            SPDAction.CYCLE);
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.TAG_ACTION );
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.TAG_LOOT );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.TAG_LOOT );
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.TAG_RESUME );
+
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.HERO_INFO );
+		emptyBindings.put( Input.Keys.UNKNOWN,              SPDAction.JOURNAL );
+
+		emptyBindings.put( Input.Keys.UNKNOWN,           SPDAction.ZOOM_IN );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.ZOOM_OUT );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.INVENTORY_SELECTOR );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.QUICKSLOT_SELECTOR );
+		emptyBindings.put( Input.Keys.UNKNOWN,          SPDAction.WAIT );
+	}
+
+	public static LinkedHashMap<Integer, GameAction> getEmptyBindings() {
+		return new LinkedHashMap<>(emptyBindings);
+	}
+
 	private static final LinkedHashMap<Integer, GameAction> defaultControllerBindings = new LinkedHashMap<>();
 	static {
 		defaultControllerBindings.put( Input.Keys.BUTTON_START,     SPDAction.BACK );
