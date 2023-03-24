@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class StoneOfTrapFinding extends Runestone {
+public class StoneOfTrapFinding extends ExoticStone {
     private static final int DIST = 8;
 
     {

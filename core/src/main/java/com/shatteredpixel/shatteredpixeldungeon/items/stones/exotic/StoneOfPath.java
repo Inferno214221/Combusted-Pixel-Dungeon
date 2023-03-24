@@ -45,7 +45,7 @@ import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 
-public class StoneOfPath extends Runestone {
+public class StoneOfPath extends ExoticStone {
 	
 	{
 		image = ItemSpriteSheet.STONE_PATH;

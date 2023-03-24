@@ -12,7 +12,7 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.PathFinder;
 
-public class StoneOfAffection extends Runestone {
+public class StoneOfAffection extends ExoticStone {
 
     {
         image = ItemSpriteSheet.STONE_AFFECTION;
@@ -36,5 +36,4 @@ public class StoneOfAffection extends Runestone {
         Sample.INSTANCE.play( Assets.Sounds.CHARMS );
 
     }
-
 }

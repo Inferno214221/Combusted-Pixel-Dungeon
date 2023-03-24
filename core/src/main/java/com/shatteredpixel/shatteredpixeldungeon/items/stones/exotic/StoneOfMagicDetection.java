@@ -55,7 +55,7 @@ import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
 
-public class StoneOfMagicDetection extends InventoryStone {
+public class StoneOfMagicDetection extends ExoticInventoryStone {
 	
 	{
 		image = ItemSpriteSheet.STONE_DETECT;

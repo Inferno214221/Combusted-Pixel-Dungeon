@@ -23,7 +23,7 @@ import com.watabou.utils.Reflection;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class StoneOfKnowledge extends InventoryStone {
+public class StoneOfKnowledge extends ExoticInventoryStone {
 
     {
         image = ItemSpriteSheet.STONE_KNOWLEDGE;
