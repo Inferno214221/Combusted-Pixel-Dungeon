@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 673,
-      "versionName": "0.26.0-INDEV",
+      "versionCode": 674,
+      "versionName": "0.27.0-INDEV",
       "outputFile": "android-debug.apk"
     }
   ],
