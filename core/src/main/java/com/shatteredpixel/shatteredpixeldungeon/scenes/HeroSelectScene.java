@@ -70,6 +70,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import sun.jvm.hotspot.debugger.cdbg.CDebugger;
+
 public class HeroSelectScene extends PixelScene {
 
 	private Image background;
@@ -84,6 +86,7 @@ public class HeroSelectScene extends PixelScene {
 	private StyledButton startBtn;
 	private IconButton infoButton;
 	private IconButton btnOptions;
+	private IconButton btnAltKit;
 	private GameOptions optionsPane;
 	private IconButton btnExit;
 
@@ -208,11 +211,38 @@ public class HeroSelectScene extends PixelScene {
 				return Messages.get(HeroSelectScene.class, "options");
 			}
 		};
-		updateOptionsColor();
 		btnOptions.visible = false;
+
+		btnAltKit = new IconButton(Icons.get(Icons.BACKPACK_LRG)){
+			@Override
+			protected void onClick() {
+				super.onClick();
+				SPDSettings.altKit(!SPDSettings.altKit());
+				updateOptionsColor();
+			}
+
+			@Override
+			protected void onPointerDown() {
+				super.onPointerDown();
+			}
+
+			@Override
+			protected void onPointerUp() {
+				updateOptionsColor();
+			}
+
+			@Override
+			protected String hoverText() {
+				return Messages.get(HeroSelectScene.class, "alt_kit");
+			}
+		};
+		btnAltKit.visible = false;
+		updateOptionsColor();
+		SPDSettings.altKit(false);
 
 		if (DeviceCompat.isDebug() || Badges.isUnlocked(Badges.Badge.VICTORY) || SPDSettings.allUnlocked()){
 			add(btnOptions);
+			add(btnAltKit);
 		} else {
 			Dungeon.challenges = 0;
 			SPDSettings.challenges(0);
@@ -300,6 +330,7 @@ public class HeroSelectScene extends PixelScene {
 			add(btnFade);
 
 			btnOptions.setRect(startBtn.right(), startBtn.top(), 20, 21);
+			btnAltKit.setRect(btnOptions.right()-4, btnOptions.top(), 20, 21);
 			optionsPane.setPos(btnOptions.right(), btnOptions.top() - optionsPane.height() - 2);
 			align(optionsPane);
 		} else {
@@ -373,6 +404,11 @@ public class HeroSelectScene extends PixelScene {
 		} else {
 			btnOptions.icon().resetColor();
 		}
+		if (SPDSettings.altKit()){
+			btnAltKit.icon().hardlight(0f, 0.67f, 1.5f);
+		} else {
+			btnAltKit.icon().resetColor();
+		}
 	}
 
 	private void setSelectedHero(HeroClass cl){
@@ -404,7 +440,7 @@ public class HeroSelectScene extends PixelScene {
 			infoButton.setPos(heroName.right(), heroName.top() + (heroName.height() - infoButton.height())/2f);
 			align(infoButton);
 
-			btnOptions.visible = btnOptions.active = !SPDSettings.intro();
+			btnAltKit.visible = btnOptions.visible = btnOptions.active = !SPDSettings.intro();
 
 		} else {
 			title.visible = false;
@@ -419,8 +455,10 @@ public class HeroSelectScene extends PixelScene {
 			infoButton.visible = infoButton.active = true;
 			infoButton.setPos(startBtn.right(), startBtn.top());
 
-			btnOptions.visible = btnOptions.active = !SPDSettings.intro();
+			btnAltKit.visible = btnOptions.visible = btnOptions.active = !SPDSettings.intro();
 			btnOptions.setPos(startBtn.left()-btnOptions.width(), startBtn.top());
+
+			btnAltKit.setRect(infoButton.right()-5, infoButton.top(), 20, 21);
 
 			optionsPane.setPos(heroBtns.get(0).left(), startBtn.top() - optionsPane.height() - 2);
 			align(optionsPane);
@@ -468,6 +506,8 @@ public class HeroSelectScene extends PixelScene {
 		optionsPane.alpha(alpha);
 		btnOptions.enable(alpha != 0);
 		btnOptions.icon().alpha(alpha);
+		btnAltKit.enable(alpha != 0);
+		btnAltKit.icon().alpha(alpha);
 		infoButton.enable(alpha != 0);
 		infoButton.icon().alpha(alpha);
 

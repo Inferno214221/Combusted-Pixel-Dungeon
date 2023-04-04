@@ -52,6 +52,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Waterskin;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.MasterThievesArmband;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
@@ -103,10 +104,7 @@ public enum HeroClass {
 		hero.heroClass = this;
 		Talent.initClassTalents(hero);
 
-		Item i = new ClothArmor().identify();
-		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (ClothArmor)i;
-
-		i = new Food();
+		Item i = new Food();
 		if (!Challenges.isItemBlocked(i)) i.collect();
 
 		Waterskin waterskin = new Waterskin();
@@ -167,19 +165,29 @@ public enum HeroClass {
 
 	private static void initWarrior( Hero hero ) {
 		(hero.belongings.weapon = new WornShortsword()).identify();
-		ThrowingStone stones = new ThrowingStone();
-		stones.quantity(3).collect();
-		Dungeon.quickslot.setSlot(0, stones);
-
-		if (hero.belongings.armor != null){
-			hero.belongings.armor.affixSeal(new BrokenSeal());
-		}
 
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 
-		new PotionOfHealing().identify();
 		new ScrollOfRage().identify();
+
+		if (SPDSettings.altKit()) {
+			hero.STR += 2;
+			new BrokenSeal().collect();
+
+			new PotionOfStrength().identify();
+		} else {
+			Item i = new ClothArmor().identify();
+			if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (ClothArmor)i;//FIXME: Make impossible
+			if (hero.belongings.armor != null){
+				hero.belongings.armor.affixSeal(new BrokenSeal());
+			}
+			ThrowingStone stones = new ThrowingStone();
+			stones.quantity(3).collect();
+			Dungeon.quickslot.setSlot(0, stones);
+
+			new PotionOfHealing().identify();
+		}
 	}
 
 	private static void initMage( Hero hero ) {
@@ -197,11 +205,12 @@ public enum HeroClass {
 
 		new ScrollOfUpgrade().identify();
 		new PotionOfLiquidFlame().identify();
+
+		Item i = new ClothArmor().identify();
+		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (ClothArmor)i;
 	}
 
 	private static void initRogue( Hero hero ) {
-		(hero.belongings.weapon = new Dagger()).identify();
-
 		CloakOfShadows cloak = new CloakOfShadows();
 		(hero.belongings.artifact = cloak).identify();
 		hero.belongings.artifact.activate( hero );
@@ -215,8 +224,24 @@ public enum HeroClass {
 		new MagicalHolster().collect();
 		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
 
-		new ScrollOfMagicMapping().identify();
 		new PotionOfInvisibility().identify();
+		if (SPDSettings.altKit()) {
+			(hero.belongings.weapon = new Gloves()).identify();
+
+			MasterThievesArmband armband = new MasterThievesArmband();
+			(hero.belongings.misc = armband).identify();
+			hero.belongings.misc.activate( hero );
+			Dungeon.quickslot.setSlot(1, armband);
+
+			new ScrollOfMirrorImage().identify();
+		} else {
+			(hero.belongings.weapon = new Dagger()).identify();
+
+			Item i = new ClothArmor().identify();
+			if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (ClothArmor)i;//FIXME: Make impossible
+
+			new ScrollOfMagicMapping().identify();
+		}
 	}
 
 	private static void initHuntress( Hero hero ) {
@@ -231,6 +256,9 @@ public enum HeroClass {
 
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();
+
+		Item i = new ClothArmor().identify();
+		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (ClothArmor)i;
 	}
 
 	private static void initDuelist( Hero hero ) {
@@ -249,6 +277,9 @@ public enum HeroClass {
 
 		new PotionOfStrength().identify();
 		new ScrollOfMirrorImage().identify();
+
+		Item i = new ClothArmor().identify();
+		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (ClothArmor)i;
 	}
 
 	private static void initDebug( Hero hero ) {
