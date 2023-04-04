@@ -330,8 +330,8 @@ public abstract class Level implements Bundlable {
 
 		version = bundle.getInt( VERSION );
 		
-		//saves from before v1.0.3 are not supported
-		if (version < ShatteredPixelDungeon.v1_0_3){
+		//saves from before v1.2.3 are not supported
+		if (version < ShatteredPixelDungeon.v1_2_3){
 			throw new RuntimeException("old save");
 		}
 
@@ -1449,6 +1449,8 @@ public abstract class Level implements Bundlable {
 				return Messages.get(Level.class, "pedestal_name");
 			case Terrain.BARRICADE:
 				return Messages.get(Level.class, "barricade_name");
+			case Terrain.BOMBABLE:
+				return Messages.get(Level.class, "bombable_name");
 			case Terrain.HIGH_GRASS:
 				return Messages.get(Level.class, "high_grass_name");
 			case Terrain.LOCKED_EXIT:
@@ -1500,6 +1502,8 @@ public abstract class Level implements Bundlable {
 				return Messages.get(Level.class, "locked_exit_desc");
 			case Terrain.BARRICADE:
 				return Messages.get(Level.class, "barricade_desc");
+			case Terrain.BOMBABLE:
+				return Messages.get(Level.class, "bombable_desc");
 			case Terrain.SIGN:
 				return Messages.get(Level.class, "sign_desc");
 			case Terrain.INACTIVE_TRAP:

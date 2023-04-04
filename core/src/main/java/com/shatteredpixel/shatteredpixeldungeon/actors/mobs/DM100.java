@@ -74,10 +74,11 @@ public class DM100 extends Mob implements Callback {
 	public int drRoll() {
 		return super.drRoll() + Random.NormalIntRange(0, 4);
 	}
-	
+
 	@Override
 	protected boolean canAttack( Char enemy ) {
-		return new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
+		return super.canAttack(enemy)
+				|| new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
 	}
 	
 	//used so resistances can differentiate between melee and magical attacks
@@ -86,7 +87,8 @@ public class DM100 extends Mob implements Callback {
 	@Override
 	protected boolean doAttack( Char enemy ) {
 
-		if (Dungeon.level.distance( pos, enemy.pos ) <= 1) {
+		if (Dungeon.level.adjacent( pos, enemy.pos )
+				|| new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos != enemy.pos) {
 			
 			return super.doAttack( enemy );
 			

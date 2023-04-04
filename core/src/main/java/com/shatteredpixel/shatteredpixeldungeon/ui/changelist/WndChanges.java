@@ -5,9 +5,6 @@
  * Shattered Pixel Dungeon
  * Copyright (C) 2014-2023 Evan Debenham
  *
- * Combusted Pixel Dungeon
- * Copyright (C) 2022-2023 Inferno214221 (inferno214221@gmail.com)
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -30,9 +27,9 @@ import com.watabou.input.PointerEvent;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.PointerArea;
 
-public class ChangesWindow extends WndTitledMessage {
+public class WndChanges extends WndTitledMessage {
 	
-	public ChangesWindow(Image icon, String title, String message ) {
+	public WndChanges( Image icon, String title, String message ) {
 		super( icon, title, message);
 		
 		PointerArea blocker = new PointerArea( 0, 0, PixelScene.uiCamera.width, PixelScene.uiCamera.height ) {

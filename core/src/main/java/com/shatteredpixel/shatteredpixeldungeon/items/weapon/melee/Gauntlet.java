@@ -53,7 +53,7 @@ public class Gauntlet extends MeleeWeapon {
 
 	@Override
 	protected void duelistAbility(Hero hero, Integer target) {
-		Sai.comboStrikeAbility(hero, target, 0.20f, this);
+		Sai.comboStrikeAbility(hero, target, 0.30f, this);
 	}
 
 }
