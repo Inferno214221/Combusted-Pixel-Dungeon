@@ -241,8 +241,6 @@ public class Ghoul extends Mob {
 
 		@Override
 		public boolean act() {
-			ghoul.sprite.visible = Dungeon.level.heroFOV[ghoul.pos];
-
 			if (target.alignment != ghoul.alignment){
 				detach();
 				return true;
@@ -303,6 +301,12 @@ public class Ghoul extends Mob {
 
 			spend(TICK);
 			return true;
+		}
+
+		public void updateVisibility(){
+			if (ghoul != null && ghoul.sprite != null){
+				ghoul.sprite.visible = Dungeon.level.heroFOV[ghoul.pos];
+			}
 		}
 
 		public void set(int turns, Ghoul ghoul){

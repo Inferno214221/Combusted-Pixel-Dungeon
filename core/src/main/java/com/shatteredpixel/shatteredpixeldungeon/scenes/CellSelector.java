@@ -179,7 +179,7 @@ public class CellSelector extends ScrollArea {
 	
 	@Override
 	protected void onPointerDown( PointerEvent event ) {
-
+		camera.edgeScroll.set(-1);
 		if (event != curEvent && another == null) {
 					
 			if (curEvent.type == PointerEvent.Type.UP) {
@@ -202,6 +202,7 @@ public class CellSelector extends ScrollArea {
 	
 	@Override
 	protected void onPointerUp( PointerEvent event ) {
+		camera.edgeScroll.set(1);
 		if (pinching && (event == curEvent || event == another)) {
 			
 			pinching = false;
